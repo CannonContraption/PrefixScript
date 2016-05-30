@@ -1,0 +1,10 @@
+Welcome to PrefixScript!
+
+Right now, the version is in pretty constant flux, so I'm not going
+to presume that the version number is one thing or another. For now,
+just read INSTALL for instructions on installing PrefixScript. Note
+that the file doc.html is only useful once you have a working and
+fully compiled copy of PrefixScript, as it is just an API reference
+page.
+
+Happy coding!

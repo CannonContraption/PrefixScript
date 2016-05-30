@@ -1,0 +1,4 @@
+versionminor = @PrefixScript_VERSION_MINOR@;
+versionmajor = @PrefixScript_VERSION_MAJOR@;
+version = versionmajor + (versionminor / 1000.0);
+document.getElementById("introduction").innerHTML="PrefixScript "+version+" Documentation Page";

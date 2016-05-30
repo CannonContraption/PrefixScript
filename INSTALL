@@ -1,0 +1,54 @@
+Welcome to the PrefixScript Install page!
+
+Compilation and installation of PrefixScript is very straightforward, but you will
+need the following things to proceed:
+
+* A valid cmake installation (Version 3.1.0 or better)
+* A valid copy of GNU Make or comparable
+* A c++11 compiler (GCC, G++ and family)
+* 3 minutes of time or more
+
+If you have all of these, by all means, READ ON!
+
+If not, you may want to go back and look into obtaining all the rest of the required
+items from the list. If you are running Linux (which IMHO you should) then your distro's
+package manager should be able to help you with finding most of the items above. If,
+however, you are running Fedora or Ubuntu, you may need to install said package manager
+in order to make this easy. This is because they use GNOME Software, which is very
+limited from the standpoint of installing system libraries.
+
+In order to find a package manager on Fedora:
+* Open GNOME Software
+* Search for Yumex
+* Install Yum Extender (DNF)
+NOTE: if the (DNF) is missing, and no version has it, don't worry, you're fine. Just
+install the version you can.
+* Run it when you're finished. Here you can browse everything you'll be likely to ever
+need.
+
+In order to find a package manager on Ubuntu:
+* Open Ubuntu Software
+* Search for Synaptic
+* Install the Synaptic Package Manager
+* Run it when you're finished. Here you can browse everything you'll be likely to ever
+need.
+
+
+* Create folder build inside the source folder
+* open a terminal and cd to your new build folder
+* Run cmake ..
+* Address any errors CMake displays (if any)
+* Run make
+* Address any errors Make displays (if any)
+* Run make test
+* At this point, if you see any errors, either you aren't in {sourcedir}/build or there is
+something wrong with either your copy of PrefixScript or your build system.
+    - if this recurrs on other systems, file a bug.
+* If there are no errors, run sudo make install
+* You now have a copy of PrefixScript built and installed!
+
+Refer to {sourcedir}/doc.html for API reference. The prefixscript command has been installed, and it is your new prefixscript interpreter. Have fun!
+
+
+WARNING: Failiure to create the build directory will result in make test failing as well!
+You have been warned!

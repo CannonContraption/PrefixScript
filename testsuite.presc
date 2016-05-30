@@ -1,0 +1,75 @@
+c
+Welcome to the prefixscript test suite source code!
+This script tests the basic functions of prefixscript
+so that it can be tested during development. If any
+one of these tests fails, it is likely that either your
+compiler lets you compile c++11 code as c++98, or there
+is a rather huge bug in your version of PrefixScript,
+in which case you should file a bug report right away!
+/c
+setfails 0
+c
+    if we have any failed commands, then the test suite failed and we should exit, not wait for more to go wrong. (since 0.011)
+/c
++ 0 /+
+if 1 = 1 + pop 1 /+ /if
+if 1 != 1 + pop 0 /+ /else + pop 1 /+ /if
+if 1 < 2 + pop 1 /+ /else + pop 0 /+ /if
+if 2 > 1 + pop 1 /+ /else + pop 0 /+ /if
+if 1 <= 1 + pop 1 /+ /else + pop 0 /+ /if
+if 1 >= 1 + pop 1 /+ /else + pop 0 /+ /if
+if 2 >= 1 + pop 1 /+ /else + pop 0 /+ /if
+if 1 <= 2 + pop 1 /+ /else + pop 0 /+ /if
+memory store 1
++ 0 /+
+repeat 5
++ pop 1 /+
+/repeat
+if pop = 5
+    memory recall 1 + pop 1 /+ memory store 1
+/if
+c This is a comment /c
++ 0 /+ + 4 /+ silentpop
+if pop = 0 memory recall 1 + pop 1 /+ /if
++ 1 /+
+s2 dupe
+s3 dupe
+s2 add
++ 1 /+
+s3 add
+s2 s1pop
+s3 s1pop
+s2 s1pop
+s3 s1pop
++ pop pop pop pop pop /+
++ 4 /+
+math sqrt /math
+if pop = 2
+    + pop 1 /+
+/if
++ 4 /+
+math pow 2 /math
+if pop = 16
+    + pop 1 /+
+/if
++ 1 /+
+math loge /math
+if pop = 0
+    + pop 1 /+
+/if
++ 100 /+
+math log10 /math
+if pop = 2
+    + pop 1 /+
+/if
++ 0 /+
+math tan rad /math
+if pop = 0
+    + pop 1 /+
+/if
+function ../testsuite-functionload.presc 2 /function
+if pop = 2.22
+    + pop 1 /+
+/if
+disp print /// of 20 tests passed / / /print
+exit
