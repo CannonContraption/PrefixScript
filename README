@@ -1,10 +1,37 @@
-Welcome to PrefixScript!
+WELCOME TO PREFIXSCRIPT!
 
-Right now, the version is in pretty constant flux, so I'm not going
-to presume that the version number is one thing or another. For now,
-just read INSTALL for instructions on installing PrefixScript. Note
-that the file doc.html is only useful once you have a working and
-fully compiled copy of PrefixScript, as it is just an API reference
-page.
+PrefixScript is a lightweight scripting language written ONLY in base C++11. Advantages of PrefixScript include:
 
-Happy coding!
+- Fast code: when a program is run it runs at almost native speed
+- Rich documentation: just open doc.html and you've got a complete
+	 reference for the entire language at your fingertips
+- Simple memory management: PrefixScript works more like an RPN
+	 calculator than a programming language. There is no need
+	 to remember which variable name was used- just type pop!
+- Multi-file functions: PrefixScript embeds each function in a new
+	 file, with any and all arguments as values in the stack for
+	 that program. Similar to Python, if it works alone, it works
+	 as a function module
+
+These are a small selection of the various features of PrefixScript.
+
+In order to better demonstrate how simple PrefixScript is, here is an example script. It adds 4, 5, 6, and 7 and then displays the result and forgets it, freeing the memory used:
+
++ 4 5 6 7 /+
+popn
+exit
+
+You can find this file in "example.presc" if you would like to run it yourself.
+
+Note some build dependancies exist for the default build, these are not required. All that is really required is a c++11 compiler and a command line.
+
+In order to run a basic install, it is reccommended that the following tools be installed:
+
+ - CMake
+ - GNU Make
+ - g++ (or gcc-c++ etc.)
+
+Compiling main.cpp within any c++11 compiler should yield similar results, but it will not allow for easy installation and further changes to be seamlessly made within the program without constantly recompiling the ENTIRE project.
+
+Have fun!
+
