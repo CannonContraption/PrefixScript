@@ -71,11 +71,11 @@ bool commandparser::morecommands(string command){
                     cerr<<"ERROR: Stack is empty!"<<endl;
                 }
             }
-            else if(command == "cos"||command == "acos"||command == "sin"||command =="asin"||command=="tan"||command=="atan"){
+            else if(command == "cos" || command == "acos" || command == "sin" || command == "asin" || command== "tan" || command=="atan"){
                 if(command == "acos" || command == "asin" || command == "atan") issx = true; else issx = false;
-                if(command =="cos"||command=="acos") d=1;
-                if(command == "sin"||command=="asin") d=2;
-                if(command == "tan"||command=="atan") d=3;
+                if(command == "cos"  || command=="acos") d=1;
+                if(command == "sin"  || command=="asin") d=2;
+                if(command == "tan"  || command=="atan") d=3;
                 command = read();
                 if(!storage.empty()){
                     if(command == "rad")
@@ -172,7 +172,8 @@ bool commandparser::morecommands(string command){
         e = false;
         f = false;
         buffer = "empty";
-    } else if(command == "linebreak") cout<<endl;
+    }
+    else if(command == "linebreak") cout<<endl;
     else if(command == "repeat"){
         command = read();
         if(command == "pop"){
