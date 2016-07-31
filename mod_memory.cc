@@ -1,14 +1,6 @@
 #include "mod_cnf.cc"
 bool commandparser::mod_memory(string command){
-    if(command == "input"){
-        getDouble();
-        return true;
-    }
-    else if(command == "sinput"){
-        uinput = getString();
-        return true;
-    }
-    else if(command == "memory"){
+    if(command == "memory"){
         command = read();
         if(command == "store"){
             command =read();
