@@ -1,6 +1,20 @@
-#include"housekeeping.cpp"
-void commandparser::stackpush(double topush){
-    storage.push(topush);
+#include"mod_math.cc"
+
+/* Extra stacks module
+ * version 1, original implementation
+ * Used for second and third stacks, extra memory storage
+ */
+
+bool commandparser::mod_extra_stacks(string command){
+    if(command == "s2"){
+        secondstack();
+        return true;
+    }
+    else if(command == "s3"){
+        thirdstack();
+        return true;
+    }
+    return false;
 }
 bool commandparser::secondstack(){
     command = read();
