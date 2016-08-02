@@ -15,5 +15,6 @@ void commandparser::runcommand(string command){
     if(mod_logic         (command) == false)
     if(mod_memory        (command) == false)
     if(mod_extra_stacks  (command) == false)
+    if(mod_strings       (command) == false)
         mod_cnf           (command); //module command not found
 }

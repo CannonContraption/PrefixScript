@@ -60,6 +60,7 @@ protected:
     bool mod_script      (string command);
     bool mod_stack       (string command);
     bool mod_extra_stacks(string command);
+    bool mod_strings     (string command);
 public:
     Stacky<double> storage;
     string         command;
