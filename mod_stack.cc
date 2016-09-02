@@ -1,10 +1,12 @@
 #include "mod_bmath.cc"
 
+
 /* Main Stack Management Module
  * version 1, original implementation
  * Used for basic memory use and management.
  */
-
+#ifndef MOD_STACK
+#define MOD_STACK 4
 bool commandparser::mod_stack(string command){
     //Stack pop
     if(command == "pop"){
@@ -55,3 +57,4 @@ bool commandparser::mod_stack(string command){
         return false;
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#include "mod_logic.cc"
 bool commandparser::mod_strings(string command){
 	string buffer;
 	if(command == "replace"){

@@ -1,4 +1,4 @@
-#include "mod_logic.cc"
+#include"mod_strings.cc"
 bool commandparser::mod_math(string command){
     if(command == "math"){
         while(command != "/math"){

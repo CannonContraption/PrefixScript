@@ -8,7 +8,9 @@
  */
 
 void commandparser::runcommand(string command){
+	#ifdef MOD_STACK
     if(mod_stack         (command) == false)
+    #endif
     if(mod_bmath         (command) == false)
     if(mod_script        (command) == false)
     if(mod_math          (command) == false)
