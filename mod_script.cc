@@ -1,12 +1,11 @@
-#include "stacks.cpp"
-
 /* Scripting Command Module
  * Version 1, original implementation
  * Used for basic scripting functions such as doing a
  * version check, printing to the console, and writing
  * comments.
  */
-
+#ifndef MOD_SCRIPT
+#define MOD_SCRIPT 1
 bool commandparser::mod_script(string command){
     if(command =="return"){
         command = read();
@@ -114,3 +113,4 @@ int commandparser::confirmversion(double version){
     }
     return 0;
 }
+#endif

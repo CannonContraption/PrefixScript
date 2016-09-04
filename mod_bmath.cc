@@ -1,10 +1,9 @@
-#include "mod_script.cc"
-
 /* Basic math modules
  * Module version 1, original implementation.
  * Used for four-function calculator stuff
  */
-
+#ifndef MOD_BMATH
+#define MOD_BMATH 1
 bool commandparser::mod_bmath(string command){
     //addition command
     if(command == "+"){
@@ -163,3 +162,4 @@ bool commandparser::mod_bmath(string command){
     }
     return false;
 }
+#endif

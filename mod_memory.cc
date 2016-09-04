@@ -1,4 +1,5 @@
-#include "mod_cnf.cc"
+#ifndef MOD_MEMORY
+#define MOD_MEMORY
 bool commandparser::mod_memory(string command){
     if(command == "input"){
         getDouble();
@@ -40,3 +41,4 @@ bool commandparser::mod_memory(string command){
     }
     return false;
 }
+#endif

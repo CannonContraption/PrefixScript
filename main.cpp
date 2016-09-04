@@ -18,7 +18,11 @@
 
 #include<iostream>
 #include<sstream>
+#include"Stacky.cpp"
+#include"defs.hh"
+#include"extensions.cpp"
 #include"commands.cpp"
+#include"core.cc"
 using namespace std;
 
 int main(int argc, char* argv[]){

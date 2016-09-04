@@ -1,4 +1,5 @@
-#include "mod_memory.cc"
+#ifndef MOD_LOGIC
+#define MOD_LOGIC
 bool commandparser::mod_logic(string command){
     if(command == "if"){
         bool e = false;
@@ -206,3 +207,4 @@ int commandparser::testconditions(string condition, double second, double first)
     }
     return 4;
 }
+#endif

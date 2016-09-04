@@ -1,4 +1,3 @@
-#include "core.cc"
 class extensions{
 protected:
     commandparser parser;

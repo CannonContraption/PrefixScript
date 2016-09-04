@@ -1,4 +1,3 @@
-#include "defs.hh"
 #include "versioninfo.h"
 
 void commandparser::main(){

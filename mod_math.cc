@@ -1,4 +1,5 @@
-#include"mod_strings.cc"
+#ifndef MOD_MATH
+#define MOD_MATH 1
 bool commandparser::mod_math(string command){
     if(command == "math"){
         while(command != "/math"){
@@ -86,3 +87,4 @@ bool commandparser::mod_math(string command){
     }
     return false;
 }
+#endif

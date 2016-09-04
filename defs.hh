@@ -1,6 +1,5 @@
 //commands.h file
 //for variable storage and initilization purposes.
-#include"Stacky.cpp"
 #include <fstream>
 #include <vector>
 #include <cmath>

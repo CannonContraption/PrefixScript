@@ -1,5 +1,3 @@
-#include"mod_math.cc"
-
 /* Extra stacks module
  * version 1, original implementation
  * Used for second and third stacks, extra memory storage

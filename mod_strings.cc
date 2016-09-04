@@ -1,4 +1,5 @@
-#include "mod_logic.cc"
+#ifndef MOD_STRINGS
+#define MOD_STRINGS 1
 bool commandparser::mod_strings(string command){
 	string buffer;
 	if(command == "replace"){
@@ -26,3 +27,4 @@ bool commandparser::mod_strings(string command){
 	}
 	return false;
 }
+#endif

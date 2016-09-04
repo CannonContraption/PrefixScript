@@ -1,10 +1,10 @@
-#include "extensions.cpp"
 /* Command-Not-Found module
  * Version 1, original implementation
  * Used for alerting the user when they have typed
  * a command which does not exist.
  */
-
+#ifndef MOD_CNF
+#define MOD_CNF 1
 bool commandparser::mod_cnf(string command){
     if(command == "setfails"){
         command = read();
@@ -21,3 +21,4 @@ bool commandparser::mod_cnf(string command){
         }
     }
 }
+#endif
