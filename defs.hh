@@ -62,6 +62,7 @@ protected:
     bool mod_strings     (string command);
 public:
     Stacky<double> storage;
+    Stacky<string> strstorage;
     string         command;
     void           usescript(char* url);
     void           usescript(string url);

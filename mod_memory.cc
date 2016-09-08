@@ -5,10 +5,6 @@ bool commandparser::mod_memory(string command){
         getDouble();
         return true;
     }
-    else if(command == "sinput"){
-        uinput = getString();
-        return true;
-    }
     else if(command == "memory"){
         command = read();
         if(command == "store"){

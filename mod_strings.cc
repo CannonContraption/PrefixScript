@@ -25,6 +25,28 @@ bool commandparser::mod_strings(string command){
 		}
 		return true;
 	}
+	else if(command[0]=='"'){
+		buffer="";
+		for(;;){
+			for(char i : command){
+				buffer+=i;
+			}
+			if(command[command.size()-1] == '"'){
+				strstorage.push(buffer);
+				buffer="";
+				return true;
+			}
+			command=read();
+		}
+		return true;
+	}
+	else if(command=="sinput"){
+		buffer="";
+		getline(cin, buffer);
+		strstorage.push(buffer);
+		buffer="";
+		return true;
+	}
 	return false;
 }
 #endif
