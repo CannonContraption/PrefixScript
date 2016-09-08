@@ -7,6 +7,14 @@
 #ifndef MOD_SCRIPT
 #define MOD_SCRIPT 1
 bool commandparser::mod_script(string command){
+    if(command == "input"){
+        getDouble();
+        return true;
+    }
+    if(command == "sinput"){
+        uinput = getString();
+        return true;
+    }
     if(command =="return"){
         command = read();
         if(command =="pop"||command=="top") 
@@ -15,32 +23,33 @@ bool commandparser::mod_script(string command){
             scriptreturn = todouble(command);
         return true;
     }
-    else if(command == "quit" || command == "exit"){
+    if(command == "quit" || command == "exit"){
         scriptreturn = 0;
         cout<<endl;
         throw(0);
         return true;
-    } else if (command == "c"){
+    }
+    if (command == "c"){
         while(command != "/c"){
             command = read();
         }
         return true;
     }
-    else if(command == "print"){
+    if(command == "print"){
         println();
         return true;
     }
-    else if(command == "linebreak"){
+    if(command == "linebreak"){
         cout<<endl;
         return true;
     }
-    else if(command == "vcheck"){
+    if(command == "vcheck"){
         c=confirmversion(version);
         if(c = 1) return true;
         command="";
         return true;
     }
-    else if(command == "function"){
+    if(command == "function"){
         runfunction();
         return true;
     }
