@@ -93,6 +93,22 @@ bool commandparser::mod_strings(string command){
 		}
 		return true;
 	}
+	else if(command == "concat"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			command = read();
+			buffer = strstroage.pop();
+			if(command == "pop"){
+				strstorage.push(buffer+strstorage.pop());
+			}
+			else if(command == "top"){
+				strstorage.push(buffer+strstorage.top());
+			}
+		}
+		return true;
+	}
 	return false;
 }
 #endif
