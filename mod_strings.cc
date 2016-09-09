@@ -31,6 +31,7 @@ bool commandparser::mod_strings(string command){
 			for(char i : command){
 				buffer+=i;
 			}
+			buffer+=" ";
 			if(command[command.size()-1] == '"'){
 				strstorage.push(buffer);
 				buffer="";
@@ -45,6 +46,51 @@ bool commandparser::mod_strings(string command){
 		getline(cin, buffer);
 		strstorage.push(buffer);
 		buffer="";
+		return true;
+	}
+	else if(command == "strpop"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			cout<<strstorage.pop();
+		}
+		return true;
+	}
+	else if(command == "strpopn"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			cout<<strstorage.pop()<<endl;
+		}
+		return true;
+	}
+	else if(command == "strtop"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			cout<<strstorage.top();
+		}
+		return true;
+	}
+	else if(command == "strtopn"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			cout<<strstorage.top()<<endl;
+		}
+		return true;
+	}
+	else if(command == "strsilentpop"){
+		if(strstorage.empty()){
+			cerr<<"ERROR: no variable at string stack(0)!"<<endl;
+		}
+		else{
+			strstorage.pop();
+		}
 		return true;
 	}
 	return false;
