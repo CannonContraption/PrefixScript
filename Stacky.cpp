@@ -5,11 +5,9 @@ class Stacky: public stack<T> {
 public:
     T pop(){
         if(!this->empty()){
-            T number = this->top();
+            T value = this->top();
             stack<T>::pop();
-            return number;
-        } else {
-            return -666;
+            return value;
         }
     }
 };
