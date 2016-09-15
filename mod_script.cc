@@ -68,7 +68,7 @@ int commandparser::runfunction(){
         command=read();
     }
     a->runfile(filename);
-    stackpush(a->extensionreturncode);
+    storage.push(a->extensionreturncode);
     delete a;
 }
 

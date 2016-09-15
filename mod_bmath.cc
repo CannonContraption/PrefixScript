@@ -33,13 +33,13 @@ bool commandparser::mod_bmath(string command){
             else{
                 a = todouble(command);
             }
-            stackpush(a);
+            storage.push(a);
             c++;
         }
         for(;c>0;c--){
             b+=storage.pop();
         }
-        stackpush(b);
+        storage.push(b);
         b=0;
         a=0;
         c=0;

@@ -21,4 +21,16 @@ bool commandparser::mod_cnf(string command){
         }
     }
 }
+
+void handleerr(string type){
+	if(type == "stackempty"){
+		cerr<<"Empty stack. Please use an operation to add a number to the stack, or use input to prompt STDIN for one."<<endl;
+	}
+	else if (type == "strstackempty"){
+		cerr<<"String stack empty. Please input a string or prompt the user for one with the sinput command."<<endl;
+	}
+	else if (type == "cnf"){
+		cerr<<"Command invalid/not found."<<endl;
+	}
+}
 #endif

@@ -56,10 +56,6 @@ string commandparser::getString(){
     return iwant;
 }
 
-void commandparser::stackpush(double topush){
-    storage.push(topush);
-}
-
 /* todouble_multsafe turns a string into a double and returns 1 if it can't.
  * It's multsafe because 1 in multiplication and division doesn't make everything 0*/
 double commandparser::todouble_multsafe( const string& s ){

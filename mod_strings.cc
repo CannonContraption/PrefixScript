@@ -99,7 +99,7 @@ bool commandparser::mod_strings(string command){
 		}
 		else{
 			command = read();
-			buffer = strstroage.pop();
+			buffer = strstorage.pop();
 			if(command == "pop"){
 				strstorage.push(buffer+strstorage.pop());
 			}

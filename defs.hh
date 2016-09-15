@@ -70,7 +70,6 @@ public:
     void           runcommand(string command);
     int            confirmversion(double version);
     double         getreturn();
-    void           stackpush(double topush);
     double         todouble(const string& s);
     double         scriptreturn;
     void    main();
