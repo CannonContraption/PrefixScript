@@ -2,3 +2,5 @@ build/
 build
 build/*
 *~
+doc.js
+versioninfo.h
