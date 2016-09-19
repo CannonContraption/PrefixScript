@@ -1,3 +1,4 @@
+vcheck 0.017 /vcheck
 c
 Welcome to the prefixscript test suite source code!
 This script tests the basic functions of prefixscript
@@ -71,5 +72,5 @@ function ../testsuite-functionload.presc 2 /function
 if pop = 2.22
     + pop 1 /+
 /if
-disp print /// of 20 tests passed / / /print
+top print /// of 20 tests passed / / /print
 exit

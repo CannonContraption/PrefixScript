@@ -1,9 +1,9 @@
 cmake_minimum_required (VERSION 3.1.0 FATAL_ERROR)
 project (PrefixScript)
 set (PrefixScript_VERSION_MAJOR 0)
-set (PrefixScript_VERSION_MINOR 15)
+set (PrefixScript_VERSION_MINOR 17)
 set (PrefixScript_MINCOMP_MAJOR 0)
-set (PrefixScript_MINCOMP_MINOR 13)
+set (PrefixScript_MINCOMP_MINOR 17)
 configure_file (
     "${PROJECT_SOURCE_DIR}/versioninfo.h.in"
     "${PROJECT_SOURCE_DIR}/versioninfo.h"
