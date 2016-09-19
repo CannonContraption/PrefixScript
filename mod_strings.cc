@@ -29,7 +29,9 @@ bool commandparser::mod_strings(string command){
 		buffer="";
 		for(;;){
 			for(char i : command){
-				buffer+=i;
+				if (i != '"'){
+					buffer+=i;
+				}
 			}
 			buffer+=" ";
 			if(command[command.size()-1] == '"'){
