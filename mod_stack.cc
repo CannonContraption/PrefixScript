@@ -33,7 +33,7 @@ bool commandparser::mod_stack(string command){
         return true;
     }
     //stack top
-    else if(command == "disp"){
+    else if(command == "top"){
         if(storage.empty()){
             cerr<<"ERROR: no variable at stack(0)!"<<endl;
         } else {
@@ -42,7 +42,7 @@ bool commandparser::mod_stack(string command){
         return true;
     }
     //stack top with newline
-    else if(command == "top"){
+    else if(command == "topn"){
         if(storage.empty()){
             cerr<<"ERROR: no variable at stack(0)!"<<endl;
         } else {
