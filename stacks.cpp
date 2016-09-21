@@ -2,7 +2,8 @@
  * version 1, original implementation
  * Used for second and third stacks, extra memory storage
  */
-
+#ifndef MOD_EXTRA_STACKS
+#define MOD_EXTRA_STACKS 1
 bool commandparser::mod_extra_stacks(string command){
     if(command == "s2"){
         secondstack();
@@ -146,3 +147,4 @@ bool commandparser::thirdstack(){
         cout<<"s3 is a storage-only stack. It cannot be used otherwise."<<endl;
     }
 }
+#endif
