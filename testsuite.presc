@@ -73,4 +73,9 @@ if pop = 2.22
     + pop 1 /+
 /if
 top print /// of 20 tests passed / / /print
+print You should now see the text "Hello world, this is a test" (without the quotes) / /print
+"this is a test"
+"Hello world,"
+concat pop strpopn
+print If that is correct, string concat passed, as did string stack management. / /print
 exit
