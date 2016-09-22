@@ -20,6 +20,13 @@
         h1{
             background-color:black;
             color:white;
+            position:fixed;
+            top:0px;
+            margin:0px;
+            right:0px;
+            left:0px;
+            height:48px;
+            z-index:5;
         }
         h2{
             background-color:blue;
@@ -31,291 +38,315 @@
         h4{
             border: 1px solid grey;
         }
+        .sidebar{
+        	width:150px;
+        	top:48px;
+        	left:0px;
+        	float:left;
+        	border:1px solid grey;
+        	position:fixed;
+        }
+        .content{
+        	float:right;
+        	position:absolute;
+        	top:48px;
+        	right:0px;
+        	left:151px;
+        	z-index:1;
+        	border: 1px solid grey;
+        }
+        a.sidebarlink{
+        	background-color:yellow;
+        }
     </style>
 </head>
 <body>
     <h1 id="introduction"></h1>
-    <h2>A note on the use of PrefixScript</h2>
-    <p>
-        PrefixScript is not like a traditional programming language, which uses names in order to store variables. This means that instead of storing a value to memory with <code>name = 5;</code> or a similar statement, one inputs it as <code>+ 5 /+</code>. From there, if it is important and universal enough to need protection, it can be stored in one of 32 memory slots, available with the command <code>memory store 1</code>. This massive shift in concept allows for a vastly different programming flow from more traditional languages, and responds more like a calculator than a computer. At the same time, it is flexable enough to tackle basic computing tasks with minimal effort.
-    </p>
-    <h3>History</h3>
-    <p>
+    <div class=sidebar>
+    	<h2>Contents</h2>
+    	<a class=sidebarlink href="#intro">Introduction information</a><br><br>
+    	<a class=sidebarlink href="#baselanguage">Base Language</a><br><br>
+    	<a class=sidebarlink href="#userinteraction">User Interaction</a><br><br>
+    	<a class=sidebarlink href="#interpreterrelated">Interpreter Related</a><br><br>
+    	<a class=sidebarlink href="#logicandrepetition">Logic and Repetition</a><br><br>
+    	<a class=sidebarlink href="#additionalmemory">Additional Memory Functions</a><br><br>
+    	<a class=sidebarlink href="#math">Advanced Mathematics</a><br><br>
+    	<a class=sidebarlink href="#strings">String management</a><br><br>
+    </div>
+    <div class=content>
+    	<h2 id="intro">A note on the use of PrefixScript</h2>
+    	<p>
+    	    PrefixScript is not like a traditional programming language, which uses names in order to store variables. This means that instead of storing a value to memory with <code>name = 5;</code> or a similar statement, one inputs it as <code>+ 5 /+</code>. From there, if it is important and universal enough to need protection, it can be stored in one of 32 memory slots, available with the command <code>memory store 1</code>. This massive shift in concept allows for a vastly different programming flow from more traditional languages, and responds more like a calculator than a computer. At the same time, it is flexable enough to tackle basic computing tasks with minimal effort.
+    	</p>
+    	<h3>History</h3>
+    	<p>
         PrefixScript started as a modified version of std::stack in c++, implementing a more correct pop() method which returns the value it is popping out of the stack. This eventually grew to an interpreter which could read from stdin a set of space-or-linebreak separated commands. Before long, this system had several commands, if statements, a cleaned-up input system using a method to call cin allowing for future file input, and a nice stack-based memory management model, used to this day.
-    </p>
-    <p>
+    	</p>
+    	<p>
         You can trace some of the history of the language through a little declaration at the end of all parts of this documentation file. The "since" section will tell you when the command it is referencing was implemented in its current form. Some of these commands predate the name PrefixScript!
-    </p>
-    <h2>A note on the use of this documentation</h2>
-    <p>
-        To check whether a command is compatable with a version, read the "since" portion at the bottom of each command. Note that "since rpnl" means since pre-0.001.
-    </p>
-    <p>
-        Please also note that because this documentation uses MathML, only Firefox and Safari can be completely supported. All other browsers will not properly render the mathematical formulas used later.
-    </p>
-    <h2>Use of Files with PrefixScript</h2>
-    <p>
-        As of version 0.009, the first argument read after starting the program is assumed to be a file. If that's true, it will be opened and read like a script. This essentially turned PrefixScript into an interpreter, instead of an interactive console. Previously, files had to be piped using stdin, so on Linux to run a script for version 0.008 and earlier, one would type <code>cat scriptname.prefixscript | ./prefixscript-0.008</code> and now that same code for newer versions is simpler: <code>./prefixscript-0.011 scriptname.presc</code>
-    </p>
-    <p>
-        In 0.010 and 0.011 a feature was added to the language to allow for Linux Shbang! lines, but this has been taken out due to an error with memory management in the function command.
-    </p>
-    <p>
-        Note also that the file extension has been changed from .prefixscript, which is rather long, to .presc, which is much easier to type, and shows that the file is not, in fact, a strange version of the interpreter, but a file to be read by the interpreter.
-    </p>
-    <h2>Contents</h2>
-    <a href="#introduction">Introduction information</a><br>
-    <a href="#baselanguage">Base Language</a><br>
-    <a href="#userinteraction">User Interaction</a><br>
-    <a href="#interpreterrelated">Interpreter Related</a><br>
-    <a href="#logicandrepetition">Logic and Repetition</a><br>
-    <a href="#additionalmemory">Additional Memory Functions</a><br>
-    <a href="#math">Advanced Mathematics</a><br>
-    <a href="#strings">String management</a><br>
-    <h2 id="baselanguage">Base Language</h2>
-    <h3>Arithmetic</h3>
-    BASIC SYNTAX:<br><code>+ # # # /+</code><br><code>- # # # /-</code><br><code>* # # # /*</code><br><code>/ # # # //<br></code>
-    (operation) (numbers, space separated) /(operation)<br>
-    <br>
-    <br><p>
-    performs a basic arithmetic operation, then pushes the result to the top of the stack. Also used to push a single number to the stack. Accepts numbers already in the stack using the <code>pop</code> and <code>top</code> keywords.</p>
-    <p>since rpnl</p>
-    <h3>Stack Management</h3>
-    BASIC SYNTAX: <code>pop</code>, <code>popn</code>, <code>disp</code>, <code>top</code>, <code>silentpop</code>, <code>s2</code>, <code>s3</code><br>
-    (command) [argument]
-    <br><br><p>
-    Performs basic memory management. Allows for displaying numbers on the stack, and management of the second and third stacks.</p><br><br>
-    <h4>basic stack commands</h4>
-    <table>
-        <tr class=first><td>command</td><td>description</td><td>since</td></tr>
-        <tr><td>pop</td><td>Displays the top number on the stack, then removes it.</td><td>rpnl</td></tr>
-        <tr><td>popn</td><td>Same as pop, but adds a linebreak after displaying the value.</td><td>0.009</td></tr>
-        <tr><td>disp</td><td>Displays top number on the stack without removing it.</td><td>rpnl</td></tr>
-        <tr><td>top</td><td>Same as disp, but adds a linebreak after displaying the value.</td><td>0.009</td></tr>
-        <tr><td>silentpop</td><td>Removes the top number from the stack</td><td>0.006</td></tr>
-    </table>
-    <h4>Stack 2/3 commands</h4>
-    <p>
-        In order to use these commands, type <code>s2</code> for stack 2, or <code>s3</code> for stack 3, then these commands. The second and third stacks are storage only, and can't be used for operations.
-    </p>
-    <table>
-        <tr class=first><td>command</td><td>description</td><td>since</td></tr>
-        <tr><td>pop</td><td>Displays the top number on the stack, then removes it.</td><td>0.010</td></tr>
-        <tr><td>popn</td><td>Displays the top number on the stack, removes it, then adds a linebreak.</td><td>0.010</td></tr>
-        <tr><td>s1pop</td><td>Pops the first number on the stack, and sends it back to the main stack</td><td>0.010</td></tr>
-        <tr><td>s1top</td><td>reads the first number on the stack, and sends it to the main stack without removing it from stack 2/3</td><td>0.010</td></tr>
-        <tr><td>silentpop</td><td>Deletes the top number from the stack.</td><td>0.010</td></tr>
-        <tr><td>disp</td><td>Displays the top number on the stack. No linebreak.</td><td>0.010</td></tr>
-        <tr><td>top</td><td>Same as disp, but adds a linebreak</td><td>0.010</td></tr>
-        <tr><td>add</td><td>pops the top number from the main stack and pushes it to stack 2/3</td><td>0.010</td></tr>
-        <tr><td>dupe</td><td>reads the top number from the main stack and pushes it to stack 2/3</td><td>0.010</td></tr>
-    </table>
-    <p>since 0.010</p>
-    <h3>Core Language</h3>
-    <table>
-        <tr class=first><td>command</td><td>description</td><td>since</td></tr>
-        <tr><td>c ... /c</td><td>c starts a comment, /c ends it</td><td>0.009</td></tr>
-        <tr><td>quit</td><td>exits the interpreter. Required at the end of every script.</td><td>rpnl</td></tr>
-        <tr><td>exit</td><td>same as quit</td><td>rpnl</td></tr>
-        <tr><td>return</td><td>When a command is run as a script, determines the value to push back to the main stack on exit. (Similar to return in other languages)</td><td>0.012</td></tr>
-    </table>
-    <h2 id="userinteraction">User Interaction</h2>
-    <h3>print</h3>
-    BASIC SYNTAX: <code>print ... /print</code><br>
-    print (text and codes) /print<br><br>
-    <h4>codes</h4>
-    <p>
-        print can use special character sequences called codes to handle formatting text. Text is broken word-by-word, so each word is separated by a space. The codes are as follows:
-    </p>
-    <table>
-        <tr class=first><td>code</td><td>description</td><td>since</td></tr>
-        <tr><td>/</td><td>linebreak code. When surrounded by a space on each side, will react like \n in another language.</td><td>0.003</td></tr>
-        <tr><td>//</td><td>code to allow for a single slash separated by spaces. "print 333 // 333 /print" would display "333 / 333 ".</td><td>0.003</td></tr>
-        <tr><td>///</td><td>code to add an extra space. useful for sequences like: "pop print /// of 3 /print" which might display "3 of 3 " instead of 3of 3 like it would without ///</td><td>0.008</td></tr>
-        <tr><td>/ns</td><td>removes the trailing space from the word that follows. Example: <code>print test success. /ns ( /print pop print /3) /print</code> which would print <code>test success. (3/3) </code> if the top number on the stack was 3.</td><td>0.007</td></tr>
-    </table>
-    <p>Since 0.003</p>
-    <h3>input</h3>
-    BASIC SYNTAX: <code>input</code><br>
-    input<br><br>
-    <p>
-        takes a number (stored as double, just like everything else in the stack) from the user. Makes use of c++ cin>>x;
-    </p>
-    <p>since 0.010</p>
-    <h3>sinput</h3>
-    BASIC SYNTAX: <code>sinput</code><br>
-    sinput<br><br>
-    <p>
-        Takes a string input from the user and stores it in the interpreter's string buffer. Currently, however, the string buffer is not used by any function. This renders this function functionally pointless.
-    </p>
-    <p>since 0.010</p>
-    <h3>linebreak</h3>
-    BASIC SYNTAX: <code>linebreak</code><br>
-    linebreak<br><br>
-    <p>
-        Inserts a new line.
-    </p>
-    <p>since 0.005</p>
-    <h2 id="interpreterrelated">Interpreter-related</h2>
-    <h3>vcheck</h3>
-    BASIC SYNTAX: <code>vcheck #.### /vcheck</code><br>
-    vcheck (version number) /vcheck<br><br>
-    <h4>Description</h4>
-    <p>
-        The vcheck command checks the version of the language a script was written for agains the current version of the interpreter. The classic suggestion is to use the lowest version number which is compatable. This is, however, extremely limiting at this stage in development, as the language is not yet finished development. For now, this should be declared with the version of the engine you are using. When 0.020 is released, the language should be complete enough that functions will have an introduction date in the documentation, making this task much easier. For now, just use the current version.
-    </p>
-    <p>
-        If, however, you have updated the interpreter, and some big language change has taken place, this command will cause the program to exit if the version is wrong. For example, if you run a program written for version 0.005, else statements have changed. In order to stop potentially catestrophic language failiures, the interpreter would catch the bad version and quit before code gets run wrong.
-    </p>
-    <p>
-        Example usage: <code>vcheck 0.009 /vcheck</code> returns <code>Version check results: Version 0.009 confirmed OK with 0.01 (current version)</code>
-    </p>
-    <p>since 0.003</p>
-    <h3>setfails</h3>
-    BASIC SYNTAX: <code>setfails #</code><br>
-    setfails (number of bad commands)<br><br>
-    <h4>Description</h4>
-    <p>
-        Sets how many invalid commands the interpreter will accept before exiting. This max limit was implemented in order to mitigate problems from programs that don't have an exit statement. This will allow for people working with the interpreter in interactive mode to safely type their code without the metaphorical rug being pulled out from under them.
-    </p>
-    <p>since 0.011</p>
-    <h3>function</h3>
-    BASIC SYNATX: <code>function ... ... /function</code><br>
-    function (path to presc function) (arguments for presc function)<br><br>
-    <h4>Description</h4>
-    <p>
-        Runs another PrefixScript script file. The arguments are passed as the first numbers in the stack, in order, and any return value is pushed back to the stack in the main program. Keep in mind all values use double precision.
-    </p>
-    <p>
-        This is used in the test suite like so: <code>function testsuite-functionload.presc 5 /function</code>. That file expects a number to already be in the stack, so it checks to see whether it equals a value, and returns another number. The main function checks the returned number, which has been pushed to the main stack, and if it matches what is expected, it adds 1 to the number of successes.
-    </p>
-    <p>since 0.012, current implementation 0.013</p>
-    <h2 id="logicandrepetition">Logic and Repetition</h2>
-    <h3>if /else /if</h3>
-    BASIC SYNTAX: <code>if ... ... /else ... /if</code><br>
-    if (conditional statement) (commands if true) /else (commands if false) /if<br><br>
-    <h4>Description</h4>
-    <p>
-        <code>if ... ... /else ... /if</code> is the most basic logical control statement in PrefixScript. It reacts much like the if statement in any other programming language, except it accepts only one condition. For example, <code>1 = 1 && 1 != 4</code> would not work, but <code>1 != 6</code> would.
-    </p><p>
-        The conditional statement can also take the pop and disp commands in much the same way that basic arithmetic handles them. For example, <code>if pop = 5 print pop = 5 / /print /if</code> would be proper code, and assuming the top number in the main stack was 5, you would see <code>pop = 5 <br></code>
-    </p>
-    <p>if since 0.003, else since 0.005, /else replaces else since 0.007</p>
-    <h3>repeat</h3>
-    BASIC SYNTAX: <code>repeat # ... /repeat</code><br>
-    repeat (number of repetitions) [code to repeat] /repeat<br><br>
-    <h4>Description</h4>
-    <p>
-        Repeats a set of instructions a specified number of times.
-    </p>
-    <p>
-        Takes <code>top</code> and <code>pop</code> as values for number of repetitions in order to use stack values. (since 0.009)
-    </p>
-    <p>since 0.006</p>
-    <h3>srepeat</h3>
-    BASIC SYNTAX: <code>srepeat # # ... /srepeat</code><br>
-    srepeat (repeat memory index) (comparison value) [statements to repeat] /srepeat<br><br>
-    <h4>Description</h4>
-    <p>
-        Repeats a set of instructions if the comparison value and the value at the specified index of the repetion memory are equal.
-    </p>
-    <h4>Word of Warning</h4>
-    <p>
-        If the repeatmemory slot is never NOT equal to the test condition, (if it never gets updated) this will loop forever regardless of input or command.
-    </p>
-    <p>since 0.011</p>
-    <h3>sxrepeat</h3>
-    BASIC SYNTAX: <code>sxrepeat # # ... /srepeat</code><br>
-    sxrepeat (repeat memory index) (comparison value) [statements to repeat] /sxrepeat<br><br>
-    <h4>Description</h4>
-    <p>
-        Repeats a set of instructions if the comparison value and the value at the specified index of the repetition memory are not equal.
-    </p>
-    <h4>Word of Warning</h4>
-    <p>
-        If the repeatmemory slot is never equal to the test condition, (if it never gets updated) this will loop forever regardless of input or command.
-    </p>
-    <p>since 0.011</p>
-    <h2 id="additionalmemory">Additional Memory Functions</h2>
-    <h3>memory</h3>
-    BASIC SYNTAX: <code>memory recall #</code>, <code>memory store #</code><br>
-    memory (recall or store) (memory slot number)<br><br>
-    <h4>Description</h4>
-    <p>
-        Stores or retrieves a number from one of 32 double-size memory slots. These range in slot numbers from 0-31. <code>memory store 0</code> pops whatever is on the top of the stack into memory 0. <code>memory recall 0</code> pushes a copy of the value in memory slot 0 into the main stack again. Note however, that when storing the value is taken off the stack, when recalling the number remains in memory.
-    </p>
-    <p>since 0.009</p>
-    <h3>repeatmemory</h3>
-    BASIC SYNTAX: <code>repeatmemory #</code><br>
-    repeatmemory (repeat memory slot number)<br><br>
-    <h4>Description</h4>
-    <p>
-        repeatmemory stores a value into a write-only memory slot used for comparison during sentinel loops. For example, if <code>srepeat 4 4</code> is run, it will look for whatever was written to slot 4 and check whether it equals 4. If it does, it will keep repeating its code until it doesn't.
-    </p>
-    <p>
-        The repeatmemory command is functionally identical to <code>memory store</code> except it uses the repetition memory, instead of general memory and it includes no recall command.
-    </p>
-    <p>since 0.011</p>
-    <h2 id="math">Advanced Mathematics</h2>
-    <p>
-        The advanced mathematics portion of PrefixScript is a separate beast entirely. Instead of being a set of standalone commands, these commands are encapsulated in <code>math ... /math</code> separating them from the rest of any script. This means that running regular commands is slightly faster, because no matter how big the math commands get, they only get parsed when the command <code>math</code> is invoked.
-    </p>
-    <p>
-        This also means, of course, that there is an extra step in making these commands work. The rationale behind this is, of course, code organization. When function encapsulation is implemented, (which should be version 0.012, next up!) any extended commands will also be encapsulated in a command in a similar fashion. The major difference is that this is actually there all the time, those will be modules called on command.
-    </p>
-    <p>
-        This shift means that it will become easier to define and reuse complex macros within the language, and this is the first glimpse of that model! Stay tuned for more!
-    </p>
-    <h3>sqrt</h3>
-    BASIC SYNTAX: <code>math sqrt /math</code><br>
-    math sqrt /math <br><br>
-    <h4>Description</h4>
-    <p>
-        Pops the top number out of the stack and takes the square root. Pushes the result back into the stack.
-    </p>
-    <p>since 0.011</p>
-    <h3>pow</h3>
-    BASIC SYNTAX: <code>math pow # /math</code><br>
-    math pow (power to raise the base to) /math<br><br>
-    <h4>Description</h4>
-    <p>
-        Pops the top number out of the stack, raises it to number in argument. Accepts pop and top as arguments in place of #. When using pop, this means that the second number in the stack is raised to the power of the first number in the stack. Assuming x is the first number in the stack, and y is the second, this would make <math><msup><mi>y</mi><mi>x</mi></msup></math> or if a number is explicitly specified, <math><msup><mi>x</mi><mi>#</mi></msup></math>
-    </p>
-    <p>since 0.011</p>
-    <h3>loge</h3>
-    BASIC SYNTAX: <code>math loge /math</code><br>
-    math loge /math<br><br>
-    <h4>Description</h4>
-    <p>
-        Assuming that x is the top number in the stack, performs <math><msub><mi>log</mi><mi>e</mi></msub><mi>(x)</mi></math> and puts the result in place of x.
-    </p>
-    <p>since 0.011</p>
-    <h3>log10</h3>
-    BASIC SYNTAX: <code>math log10 /math</code><br>
-    math log10 /math<br><br>
-    <h4>Description</h4>
-    <p>
-        Assuming that x is the top number in the stack, performs <math><msub><mi>log</mi><mn>10</mn></msub><mi>(x)</mi></math> and puts the result in place of x.
-    </p>
-    <p>since 0.011</p>
-    <h3>Trig functions</h3>
-    BASIC FUNCTIONS: <code>math cos /math</code>, <code> math acos /math</code>, <code> math sin /math</code>, <code> math asin /math</code>, <code> math tan /math</code>, <code> math atan /math</code> <br>
-    math (trig function) /math<br><br>
-    <h4>Description</h4>
-    <p>
-        Runs the specified triginomitry function on the top number in the stack and replaces it with the result.
-    </p>
-    <p>
-        For reference: <math><mi>asin(x)</mi></math> is the same thing as <math><msup><mi>sin</mi><mn>-1</mn></msup><mi>(x)</mi></math>
-    </p>
-    <p>since 0.011</p>
-    <h2 id=strings>String management</h2>
-    <p>
-        String management works much the same way that mathematics work. While the implementation is not yet complete, there is a standard facility for storing strings. Note that as of writing, there is no good way to retrieve or manipulate strings at this time. This functionality is still in the works!
-    </p>
-    <p>
-        In order to use strings, simple type a set of double-quotes with your string inside. Note that there is also no method for escaping double quotes, so for now it is a good idea to just avoid them within strings until a solution is available.
-    </p>
+    	</p>
+    	<h2>A note on the use of this documentation</h2>
+    	<p>
+    	    To check whether a command is compatable with a version, read the "since" portion at the bottom of each command. Note that "since rpnl" means since pre-0.001.
+    	</p>
+    	<p>
+    	    Please also note that because this documentation uses MathML, only Firefox and Safari can be completely supported. All other browsers will not properly render the mathematical formulas used later.
+    	</p>
+    	<h2>Use of Files with PrefixScript</h2>
+    	<p>
+    	    As of version 0.009, the first argument read after starting the program is assumed to be a file. If that's true, it will be opened and read like a script. This essentially turned PrefixScript into an interpreter, instead of an interactive console. Previously, files had to be piped using stdin, so on Linux to run a script for version 0.008 and earlier, one would type <code>cat scriptname.prefixscript | ./prefixscript-0.008</code> and now that same code for newer versions is simpler: <code>./prefixscript-0.011 scriptname.presc</code>
+    	</p>
+    	<p>
+    	    In 0.010 and 0.011 a feature was added to the language to allow for Linux Shbang! lines, but this has been taken out due to an error with memory management in the function command.
+    	</p>
+    	<p>
+    	    Note also that the file extension has been changed from .prefixscript, which is rather long, to .presc, which is much easier to type, and shows that the file is not, in fact, a strange version of the interpreter, but a file to be read by the interpreter.
+    	</p>
+    	<h2 id="baselanguage">Base Language</h2>
+    	<h3>Arithmetic</h3>
+    	BASIC SYNTAX:<br><code>+ # # # /+</code><br><code>- # # # /-</code><br><code>* # # # /*</code><br><code>/ # # # //<br></code>
+    	(operation) (numbers, space separated) /(operation)<br>
+    	<br>
+    	<br><p>
+    	performs a basic arithmetic operation, then pushes the result to the top of the stack. Also used to push a single number to the stack. Accepts numbers already in the stack using the <code>pop</code> and <code>top</code> keywords.</p>
+    	<p>since rpnl</p>
+    	<h3>Stack Management</h3>
+    	BASIC SYNTAX: <code>pop</code>, <code>popn</code>, <code>top</code>, <code>topn</code>, <code>silentpop</code>, <code>s2</code>, <code>s3</code><br>
+    	(command) [argument]
+    	<br><br><p>
+    	Performs basic memory management. Allows for displaying numbers on the stack, and management of the second and third stacks.</p><br><br>
+    	<h4>basic stack commands</h4>
+    	<table>
+    	    <tr class=first><td>command</td><td>description</td><td>since</td></tr>
+    	    <tr><td>pop</td><td>Displays the top number on the stack, then removes it.</td><td>rpnl</td></tr>
+    	    <tr><td>popn</td><td>Same as pop, but adds a linebreak after displaying the value.</td><td>0.009</td></tr>
+    	    <tr><td>top</td><td>Displays top number on the stack without removing it.</td><td>rpnl, update at 0.017</td></tr>
+    	    <tr><td>topn</td><td>Same as top, but adds a linebreak after displaying the value.</td><td>0.009, update at 0.017</td></tr>
+    	    <tr><td>silentpop</td><td>Removes the top number from the stack</td><td>0.006</td></tr>
+    	</table>
+    	<h4>Stack 2/3 commands</h4>
+    	<p>
+    	    In order to use these commands, type <code>s2</code> for stack 2, or <code>s3</code> for stack 3, then these commands. The second and third stacks are storage only, and can't be used for operations.
+    	</p>
+    	<table>
+    	    <tr class=first><td>command</td><td>description</td><td>since</td></tr>
+    	    <tr><td>pop</td><td>Displays the top number on the stack, then removes it.</td><td>0.010</td></tr>
+    	    <tr><td>popn</td><td>Displays the top number on the stack, removes it, then adds a linebreak.</td><td>0.010</td></tr>
+    	    <tr><td>s1pop</td><td>Pops the first number on the stack, and sends it back to the main stack</td><td>0.010</td></tr>
+    	    <tr><td>s1top</td><td>reads the first number on the stack, and sends it to the main stack without removing it from stack 2/3</td><td>0.010</td></tr>
+    	    <tr><td>silentpop</td><td>Deletes the top number from the stack.</td><td>0.010</td></tr>
+    	    <tr><td>disp</td><td>Displays the top number on the stack. No linebreak.</td><td>0.010</td></tr>
+    	    <tr><td>top</td><td>Same as disp, but adds a linebreak</td><td>0.010</td></tr>
+    	    <tr><td>add</td><td>pops the top number from the main stack and pushes it to stack 2/3</td><td>0.010</td></tr>
+    	    <tr><td>dupe</td><td>reads the top number from the main stack and pushes it to stack 2/3</td><td>0.010</td></tr>
+    	</table>
+    	<p>since 0.010</p>
+    	<h3>Core Language</h3>
+    	<table>
+    	    <tr class=first><td>command</td><td>description</td><td>since</td></tr>
+    	    <tr><td>c ... /c</td><td>c starts a comment, /c ends it</td><td>0.009</td></tr>
+    	    <tr><td>quit</td><td>exits the interpreter. Required at the end of every script.</td><td>rpnl</td></tr>
+    	    <tr><td>exit</td><td>same as quit</td><td>rpnl</td></tr>
+    	    <tr><td>return</td><td>When a command is run as a script, determines the value to push back to the main stack on exit. (Similar to return in other languages)</td><td>0.012</td></tr>
+    	</table>
+    	<h2 id="userinteraction">User Interaction</h2>
+    	<h3>print</h3>
+    	BASIC SYNTAX: <code>print ... /print</code><br>
+    	print (text and codes) /print<br><br>
+    	<h4>codes</h4>
+    	<p>
+    	    print can use special character sequences called codes to handle formatting text. Text is broken word-by-word, so each word is separated by a space. The codes are as follows:
+    	</p>
+    	<table>
+    	    <tr class=first><td>code</td><td>description</td><td>since</td></tr>
+    	    <tr><td>/</td><td>linebreak code. When surrounded by a space on each side, will react like \n in another language.</td><td>0.003</td></tr>
+    	    <tr><td>//</td><td>code to allow for a single slash separated by spaces. "print 333 // 333 /print" would display "333 / 333 ".</td><td>0.003</td></tr>
+    	    <tr><td>///</td><td>code to add an extra space. useful for sequences like: "pop print /// of 3 /print" which might display "3 of 3 " instead of 3of 3 like it would without ///</td><td>0.008</td></tr>
+    	    <tr><td>/ns</td><td>removes the trailing space from the word that follows. Example: <code>print test success. /ns ( /print pop print /3) /print</code> which would print <code>test success. (3/3) </code> if the top number on the stack was 3.</td><td>0.007</td></tr>
+    	</table>
+    	<p>Since 0.003</p>
+    	<h3>input</h3>
+    	BASIC SYNTAX: <code>input</code><br>
+    	input<br><br>
+    	<p>
+    	    takes a number (stored as double, just like everything else in the stack) from the user. Makes use of c++ cin>>x;
+    	</p>
+    	<p>since 0.010</p>
+    	<h3>sinput</h3>
+    	BASIC SYNTAX: <code>sinput</code><br>
+    	sinput<br><br>
+    	<p>
+    	    Takes a string input from the user and stores it in the interpreter's string buffer. Currently, however, the string buffer is not used by any function. This renders this function functionally pointless.
+    	</p>
+    	<p>since 0.010</p>
+    	<h3>linebreak</h3>
+    	BASIC SYNTAX: <code>linebreak</code><br>
+    	linebreak<br><br>
+    	<p>
+    	    Inserts a new line.
+    	</p>
+    	<p>since 0.005</p>
+    	<h2 id="interpreterrelated">Interpreter-related</h2>
+    	<h3>vcheck</h3>
+    	BASIC SYNTAX: <code>vcheck #.### /vcheck</code><br>
+    	vcheck (version number) /vcheck<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    The vcheck command checks the version of the language a script was written for agains the current version of the interpreter. The classic suggestion is to use the lowest version number which is compatable. This is, however, extremely limiting at this stage in development, as the language is not yet finished development. For now, this should be declared with the version of the engine you are using. When 0.020 is released, the language should be complete enough that functions will have an introduction date in the documentation, making this task much easier. For now, just use the current version.
+    	</p>
+    	<p>
+    	    If, however, you have updated the interpreter, and some big language change has taken place, this command will cause the program to exit if the version is wrong. For example, if you run a program written for version 0.005, else statements have changed. In order to stop potentially catestrophic language failiures, the interpreter would catch the bad version and quit before code gets run wrong.
+    	</p>
+    	<p>
+    	    Example usage: <code>vcheck 0.009 /vcheck</code> returns <code>Version check results: Version 0.009 confirmed OK with 0.01 (current version)</code>
+    	</p>
+    	<p>since 0.003</p>
+    	<h3>setfails</h3>
+    	BASIC SYNTAX: <code>setfails #</code><br>
+    	setfails (number of bad commands)<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Sets how many invalid commands the interpreter will accept before exiting. This max limit was implemented in order to mitigate problems from programs that don't have an exit statement. This will allow for people working with the interpreter in interactive mode to safely type their code without the metaphorical rug being pulled out from under them.
+    	</p>
+    	<p>since 0.011</p>
+    	<h3>function</h3>
+    	BASIC SYNATX: <code>function ... ... /function</code><br>
+    	function (path to presc function) (arguments for presc function)<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Runs another PrefixScript script file. The arguments are passed as the first numbers in the stack, in order, and any return value is pushed back to the stack in the main program. Keep in mind all values use double precision.
+    	</p>
+    	<p>
+    	    This is used in the test suite like so: <code>function testsuite-functionload.presc 5 /function</code>. That file expects a number to already be in the stack, so it checks to see whether it equals a value, and returns another number. The main function checks the returned number, which has been pushed to the main stack, and if it matches what is expected, it adds 1 to the number of successes.
+    	</p>
+    	<p>since 0.012, current implementation 0.013</p>
+    	<h2 id="logicandrepetition">Logic and Repetition</h2>
+    	<h3>if /else /if</h3>
+    	BASIC SYNTAX: <code>if ... ... /else ... /if</code><br>
+    	if (conditional statement) (commands if true) /else (commands if false) /if<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    <code>if ... ... /else ... /if</code> is the most basic logical control statement in PrefixScript. It reacts much like the if statement in any other programming language, except it accepts only one condition. For example, <code>1 = 1 && 1 != 4</code> would not work, but <code>1 != 6</code> would.
+    	</p><p>
+    	    The conditional statement can also take the pop and disp commands in much the same way that basic arithmetic handles them. For example, <code>if pop = 5 print pop = 5 / /print /if</code> would be proper code, and assuming the top number in the main stack was 5, you would see <code>pop = 5 <br></code>
+    	</p>
+    	<p>if since 0.003, else since 0.005, /else replaces else since 0.007</p>
+    	<h3>repeat</h3>
+    	BASIC SYNTAX: <code>repeat # ... /repeat</code><br>
+    	repeat (number of repetitions) [code to repeat] /repeat<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Repeats a set of instructions a specified number of times.
+    	</p>
+    	<p>
+    	    Takes <code>top</code> and <code>pop</code> as values for number of repetitions in order to use stack values. (since 0.009)
+    	</p>
+    	<p>since 0.006</p>
+    	<h3>srepeat</h3>
+    	BASIC SYNTAX: <code>srepeat # # ... /srepeat</code><br>
+    	srepeat (repeat memory index) (comparison value) [statements to repeat] /srepeat<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Repeats a set of instructions if the comparison value and the value at the specified index of the repetion memory are equal.
+    	e</p>
+    	<h4>Word of Warning</h4>
+    	<p>
+    	    If the repeatmemory slot is never NOT equal to the test condition, (if it never gets updated) this will loop forever regardless of input or command.
+    	</p>
+    	<p>since 0.011</p>
+    	<h3>sxrepeat</h3>
+    	BASIC SYNTAX: <code>sxrepeat # # ... /srepeat</code><br>
+    	sxrepeat (repeat memory index) (comparison value) [statements to repeat] /sxrepeat<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Repeats a set of instructions if the comparison value and the value at the specified index of the repetition memory are not equal.
+    	</p>
+    	<h4>Word of Warning</h4>
+    	<p>
+    	    If the repeatmemory slot is never equal to the test condition, (if it never gets updated) this will loop forever regardless of input or command.
+    	</p>
+    	<p>since 0.011</p>
+    	<h2 id="additionalmemory">Additional Memory Functions</h2>
+    	<h3>memory</h3>
+    	BASIC SYNTAX: <code>memory recall #</code>, <code>memory store #</code><br>
+    	memory (recall or store) (memory slot number)<br><br>
+    	<h4>Description</h4>
+    e<p>
+    e    Stores or retrieves a number from one of 32 double-size memory slots. These range in slot numbers from 0-31. <code>memory store 0</code> pops whatever is on the top of the stack into memory 0. <code>memory recall 0</code> pushes a copy of the value in memory slot 0 into the main stack again. Note however, that when storing the value is taken off the stack, when recalling the number remains in memory.
+    	</p>
+    	e<p>since 0.009</p>
+    	<h3>repeatmemory</h3>
+    	BASIC SYNTAX: <code>repeatmemory #</code><br>
+    	repeatmemory (repeat memory slot number)<br><br>
+    	<h4>Description</h4>
+    e<p>
+    e    repeatmemory stores a value into a write-only memory slot used for comparison during sentinel loops. For example, if <code>srepeat 4 4</code> is run, it will look for whatever was written to slot 4 and check whether it equals 4. If it does, it will keep repeating its code until it doesn't.
+    	</p>
+    	e<p>
+    	    The repeatmemory command is functionally identical to <code>memory store</code> except it uses the repetition memory, instead of general memory and it includes no recall command.
+    	</p>
+    	<p>since 0.011</p>
+    	<h2 id="math">Advanced Mathematics</h2>
+    e<p>
+    e    The advanced mathematics portion of PrefixScript is a separate beast entirely. Instead of being a set of standalone commands, these commands are encapsulated in <code>math ... /math</code> separating them from the rest of any script. This means that running regular commands is slightly faster, because no matter how big the math commands get, they only get parsed when the command <code>math</code> is invoked.
+    	</p>
+    ee<p>
+    e    This also means, of course, that there is an extra step in making these commands work. The rationale behind this is, of course, code organization. When function encapsulation is implemented, (which should be version 0.012, next up!) any extended commands will also be encapsulated in a command in a similar fashion. The major difference is that this is actually there all the time, those will be modules called on command.
+    	</p>
+    	e<p>
+    	    This shift means that it will become easier to define and reuse complex macros within the language, and this is the first glimpse of that model! Stay tuned for more!
+    	</p>
+    	<h3>sqrt</h3>
+    	BASIC SYNTAX: <code>math sqrt /math</code><br>
+    	math sqrt /math <br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Pops the top number out of the stack and takes the square root. Pushes the result back into the stack.
+    	</p>
+    	<p>since 0.011</p>
+    	<h3>pow</h3>
+    	BASIC SYNTAX: <code>math pow # /math</code><br>
+    	math pow (power to raise the base to) /math<br><br>
+    	<h4>Description</h4>
+    e<p>
+    e    Pops the top number out of the stack, raises it to number in argument. Accepts pop and top as arguments in place of #. When using pop, this means that the second number in the stack is raised to the power of the first number in the stack. Assuming x is the first number in the stack, and y is the second, this would make <math><msup><mi>y</mi><mi>x</mi></msup></math> or if a number is explicitly specified, <math><msup><mi>x</mi><mi>#</mi></msup></math>
+    	</p>
+    	e<p>since 0.011</p>
+    	<h3>loge</h3>
+    	BASIC SYNTAX: <code>math loge /math</code><br>
+    	math loge /math<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Assuming that x is the top number in the stack, performs <math><msub><mi>log</mi><mi>e</mi></msub><mi>(x)</mi></math> and puts the result in place of x.
+    	</p>
+    	<>since 0.011</p>
+    	<h3>log10</h3>
+    	BASIC SYNTAX: <code>math log10 /math</code><br>
+    	math log10 /math<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Assuming that x is the top number in the stack, performs <math><msub><mi>log</mi><mn>10</mn></msub><mi>(x)</mi></math> and puts the result in place of x.
+    	</p>
+    	<p>since 0.011</p>
+    	<h3>Trig functions</h3>
+    	BASIC FUNCTIONS: <code>math cos /math</code>, <code> math acos /math</code>, <code> math sin /math</code>, <code> math asin /math</code>, <code> math tan /math</code>, <code> math atan /math</code> <br>
+    	math (trig function) /math<br><br>
+    	<h4>Description</h4>
+    	<p>
+    	    Runs the specified triginomitry function on the top number in the stack and replaces it with the result.
+    	</p>
+    	<p>
+    	    For reference: <math><mi>asin(x)</mi></math> is the same thing as <math><msup><mi>sin</mi><mn>-1</mn></msup><mi>(x)</mi></math>
+    	</p>
+    	<p>since 0.011</p>
+    	<h2 id=strings>String management</h2>
+    	<p>
+    	    String management works much the same way that mathematics work. While the implementation is not yet complete, there is a standard facility for storing strings. Note that as of writing, there is no good way to retrieve or manipulate strings at this time. This functionality is still in the works!
+    	</p>
+    	<p>
+    	    In order to use strings, simple type a set of double-quotes with your string inside. Note that there is also no method for escaping double quotes, so for now it is a good idea to just avoid them within strings until a solution is available.
+    	</p>
+    </div>
     <script src=doc.js></script>
 </body>
 </html>
