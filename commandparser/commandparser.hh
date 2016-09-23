@@ -1,13 +1,20 @@
 #include<stack>
+#include<fstream>
 class commandparser{
 protected:
 	string            command;
 	bool              isfile;
 	string            filename;
-	string            repetitionbuffer;
+	vector<string>    repetitionbuffer;
 	stack<double>     storage;
+	stack<double>     storage1;
+	stack<double>     storage2;
+	int               currentstorage;
+	int               failcount;
+	int               maxfails;
+	fstream           scriptfile;
 	
-	bool              openfile(filename);
+	bool              openfile();
 public:
 	string            read();
 	bool              setfilename(string file);
