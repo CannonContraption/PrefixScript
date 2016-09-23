@@ -12,6 +12,9 @@ protected:
 	int               currentstorage;
 	int               failcount;
 	int               maxfails;
+	int               repeatlower;
+	int               repeatupper;
+	
 	fstream           scriptfile;
 	
 	bool              openfile();

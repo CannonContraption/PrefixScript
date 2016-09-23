@@ -25,15 +25,4 @@ bool commandregister::runcommand(string command){
 	}
 	return false;
 }
-bool question(){
-	cout<<"Hello world"<<endl;
-	return true;
-}
-int main(){
-	commandregister reg;
-	reg.insertcommand("question", &question);
-	if(reg.checkforcommand("question"))cout<<"Found"<<endl;
-	else cout<<"Not found."<<endl;
-	if(reg.runcommand("question"))cout<<"SUCCESS."<<endl;
-	else cout<<"FAILED."<<endl;
-}
+
