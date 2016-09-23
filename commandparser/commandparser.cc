@@ -5,16 +5,16 @@ int main(){
 }
 
 bool commandparser::store(double value){
-	storage.push(value);
+	storage[currentstorage].push(value);
 }
 
 double commandparser::top(){
-	return storage.top();
+	return storage[currentstorage].top();
 }
 
 double commandparser::pop(){
 	double result = top();
-	storage.pop();
+	storage[currentstorage].pop();
 	return result;
 }
 
