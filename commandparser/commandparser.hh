@@ -6,9 +6,7 @@ protected:
 	bool              isfile;
 	string            filename;
 	vector<string>    repetitionbuffer;
-	stack<double>     storage;
-	stack<double>     storage1;
-	stack<double>     storage2;
+	stack<double>[3]  storage;
 	int               currentstorage;
 	int               failcount;
 	int               maxfails;
