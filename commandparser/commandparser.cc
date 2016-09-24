@@ -1,9 +1,5 @@
 #include "commandparser.hh"
 
-int main(){
-	currentstorage=0;
-}
-
 bool commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
@@ -18,9 +14,14 @@ double commandparser::pop(){
 	return result;
 }
 
+bool commandparser::openfile(){
+	//This will do stuff with the file object! Promise!
+}
+
 bool commandparser::setfilename(string file){
 	filename = file;
-	return openfile();
+	if (openfile()) return true;
+	return false;
 }
 
 string commandparser::read(){
