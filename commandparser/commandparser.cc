@@ -1,6 +1,6 @@
 #include "commandparser.hh"
 
-bool commandparser::store(double value){
+void commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
 
@@ -11,6 +11,19 @@ double commandparser::top(){
 double commandparser::pop(){
 	double result = top();
 	storage[currentstorage].pop();
+	return result;
+}
+
+void commandparser::strstore(string value){
+	strstorage.push(value);
+}
+
+string commandparser::strtop(){
+	return strstorage.top();
+}
+string commandparser::strpop(){
+	string result = strtop();
+	strstorage.pop();
 	return result;
 }
 
@@ -27,7 +40,7 @@ bool commandparser::setfilename(string file){
 string commandparser::read(){
 	string toread;
     if(repeatread){
-        toread = repetitionbuffer[repeatindex];
+        toread = repetitionbuffer[repeatlevel][repeatindex];
         repeatindex++;
     } else if(scriptread){
         scriptfile>>toread;

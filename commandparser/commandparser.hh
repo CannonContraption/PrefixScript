@@ -6,7 +6,10 @@ protected:
 	string            command;
 	bool              isfile;
 	string            filename;
+	vector<string>    repetitionbuffer[32];
+	int               repeatlevel; //Stacks, so nested loops work
 	stack<double>     storage[3];
+	stack<string>     strstorage;
 	int               currentstorage;
 	int               failcount;
 	int               maxfails;
@@ -24,7 +27,10 @@ protected:
 public:
 	string            read();
 	bool              setfilename(string file);
-	bool              store(double value);
+	void              store(double value);
+	void              strstore(string value);
+	string            strtop();
+	string            strpop();
 	double            pop();
 	double            top();
 	commandparser     (commandregister * r) {cmdreg = r;}
