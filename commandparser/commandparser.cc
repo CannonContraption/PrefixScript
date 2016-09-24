@@ -31,6 +31,11 @@ string commandparser::read(){
         repeatindex++;
     } else if(scriptread){
         scriptfile>>toread;
+        if(repeatread){
+        	//use tellg and seekg to work this
+        	//Repetition buffer turned out to be
+        	//kind of clumsy with a file on hand.
+        }
     } else if(failcount>maxfails){
         toread = "exit";
     } else{

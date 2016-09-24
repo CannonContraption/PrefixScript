@@ -1,18 +1,18 @@
 #include<stack>
 #include<fstream>
 class commandparser{
-	commandregister cmdreg;
+	commandregister   *cmdreg;
 protected:
 	string            command;
 	bool              isfile;
 	string            filename;
-	vector<string>    repetitionbuffer;
 	stack<double>     storage[3];
 	int               currentstorage;
 	int               failcount;
 	int               maxfails;
-	int               repeatlower;
-	int               repeatupper;
+	int               repeatlower[32];
+	int               repeatupper[32];
+	char              repeatmode[32];
 	double            memory[32];
 	int               repeatindex;
 	bool              repeatread;
@@ -27,6 +27,6 @@ public:
 	bool              store(double value);
 	double            pop();
 	double            top();
-	commandparser     (commandregister *r) {cmdreg = *r;}
+	commandparser     (commandregister * r) {cmdreg = r;}
 };
 	
