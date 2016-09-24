@@ -13,7 +13,7 @@ configure_file (
     "${PROJECT_SOURCE_DIR}/doc.js"
 )
 include_directories("${PROJECT_BINARY_DIR}")
-add_executable(prefixscript main.cpp)
+add_executable(prefixscript main.cc)
 set_property(TARGET prefixscript PROPERTY CXX_STANDARD 11)
 set_property(TARGET prefixscript PROPERTY CXX_STANDARD_REQUIRED ON)
 install (TARGETS prefixscript DESTINATION bin)
