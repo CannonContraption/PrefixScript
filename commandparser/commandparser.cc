@@ -4,6 +4,12 @@ void commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
 
+bool commandparser::listen(){
+	if(cmdreg->checkforcommand(command)){
+		cmdreg->runcommand(command);
+	}
+}
+
 double commandparser::top(){
 	return storage[currentstorage].top();
 }

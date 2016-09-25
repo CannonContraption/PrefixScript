@@ -33,6 +33,7 @@ public:
 	string            strpop();
 	double            pop();
 	double            top();
+	bool              listen();
 	commandparser     (commandregister * r) {cmdreg = r;}
 };
 	
