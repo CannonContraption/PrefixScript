@@ -13,7 +13,7 @@ bool commandparser::listen(){
 		}
 	}
 }
-bool exit(){}
+bool exit(){} //Leave this here, leave this empty! Only exists to prevent conflicts in the register!
 
 /* todouble_multsafe turns a string into a double and returns 1 if it can't.
  * It's multsafe because 1 in multiplication and division doesn't make everything 0*/
