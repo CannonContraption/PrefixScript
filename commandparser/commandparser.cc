@@ -33,13 +33,28 @@ double commandparser::todouble( const string& s ){
 }
 
 double commandparser::top(){
-	return storage[currentstorage].top();
+	if(!storage[currentstorage].empty())
+		return storage[currentstorage].top();
+	else
+		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
+}
+
+bool commandparser::empty(){
+	return storage[currentstorage].empty();
+}
+
+bool commandparser::strempty(){
+	return strstorage.empty();
 }
 
 double commandparser::pop(){
-	double result = top();
-	storage[currentstorage].pop();
-	return result;
+	if(!storage[currentstorage].empty()){
+		double result = top();
+		storage[currentstorage].pop();
+		return result;
+	}
+	else
+		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
 }
 
 void commandparser::strstore(string value){
@@ -47,7 +62,10 @@ void commandparser::strstore(string value){
 }
 
 string commandparser::strtop(){
-	return strstorage.top();
+	if(!strstorage.empty())
+		return strstorage.top();
+	else
+		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
 string commandparser::strpop(){
 	string result = strtop();

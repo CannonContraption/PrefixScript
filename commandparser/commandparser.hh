@@ -35,6 +35,8 @@ public:
 	string            strpop();
 	double            pop();
 	double            top();
+	bool              empty();
+	bool              strempty();
 	bool              listen();
 	double            todouble(const string& s);
 	double            todouble_multsafe(const string& s);
