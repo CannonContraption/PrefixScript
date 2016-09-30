@@ -13,6 +13,7 @@ bool commandparser::listen(){
 		}
 	}
 }
+bool exit(){}
 
 /* todouble_multsafe turns a string into a double and returns 1 if it can't.
  * It's multsafe because 1 in multiplication and division doesn't make everything 0*/
@@ -105,3 +106,9 @@ string commandparser::read(){
     }
     return toread;
 }
+
+commandparser::commandparser(commandregister * r){
+	cmdreg = r;
+	r->insertcommand("exit", exit);
+}
+

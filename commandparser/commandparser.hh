@@ -40,6 +40,6 @@ public:
 	bool              listen();
 	double            todouble(const string& s);
 	double            todouble_multsafe(const string& s);
-	commandparser     (commandregister * r) {cmdreg = r;}
+	commandparser     (commandregister * r);
 };
 	
