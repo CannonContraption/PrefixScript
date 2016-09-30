@@ -11,6 +11,27 @@ bool commandparser::listen(){
 	}
 }
 
+/* todouble_multsafe turns a string into a double and returns 1 if it can't.
+ * It's multsafe because 1 in multiplication and division doesn't make everything 0*/
+double commandparser::todouble_multsafe( const string& s ){
+    istringstream i(s);
+    double x;
+    if (!(i >> x))
+        //cerr<<"Not a number!"<<endl;
+        return 1;
+    return x;
+}
+
+//same as above, just defaults to 0 for addition and subtraction
+//default for now
+double commandparser::todouble( const string& s ){
+    istringstream i(s);
+    double x;
+    if (!(i >> x))
+        return 0;
+    return x;
+}
+
 double commandparser::top(){
 	return storage[currentstorage].top();
 }

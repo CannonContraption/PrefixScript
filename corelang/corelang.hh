@@ -4,7 +4,8 @@ class corelang{
 	protected:
 		commandparser * cparser;
 	public:
-		static bool add();
+		bool add();
+		bool (*addfunction)();
 		bool sub();
 		bool mul();
 		bool div();

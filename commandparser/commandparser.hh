@@ -1,5 +1,7 @@
-#include<stack>
-#include<fstream>
+#include <stack>
+#include <fstream>
+#include <sstream>
+
 class commandparser{
 	commandregister   *cmdreg;
 protected:
@@ -34,6 +36,8 @@ public:
 	double            pop();
 	double            top();
 	bool              listen();
+	double            todouble(const string& s);
+	double            todouble_multsafe(const string& s);
 	commandparser     (commandregister * r) {cmdreg = r;}
 };
 	
