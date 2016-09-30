@@ -5,9 +5,12 @@ void commandparser::store(double value){
 }
 
 bool commandparser::listen(){
-	command = read();
-	if(cmdreg->checkforcommand(command)){
-		cmdreg->runcommand(command);
+	command = "";
+	while(command != "exit"){
+		command = read();
+		if(cmdreg->checkforcommand(command)){
+			cmdreg->runcommand(command);
+		}
 	}
 }
 
