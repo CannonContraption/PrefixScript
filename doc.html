@@ -111,7 +111,7 @@
     	performs a basic arithmetic operation, then pushes the result to the top of the stack. Also used to push a single number to the stack. Accepts numbers already in the stack using the <code>pop</code> and <code>top</code> keywords.</p>
     	<p>since rpnl</p>
     	<h3>Stack Management</h3>
-    	BASIC SYNTAX: <code>pop</code>, <code>popn</code>, <code>top</code>, <code>topn</code>, <code>silentpop</code>, <code>s2</code>, <code>s3</code><br>
+    	BASIC SYNTAX: <code>pop</code>, <code>popn</code>, <code>top</code>, <code>topn</code>, <code>silentpop</code>, <code>stack</code><br>
     	(command) [argument]
     	<br><br><p>
     	Performs basic memory management. Allows for displaying numbers on the stack, and management of the second and third stacks.</p><br><br>
@@ -124,9 +124,9 @@
     	    <tr><td>topn</td><td>Same as top, but adds a linebreak after displaying the value.</td><td>0.009, update at 0.017</td></tr>
     	    <tr><td>silentpop</td><td>Removes the top number from the stack</td><td>0.006</td></tr>
     	</table>
-    	<h4>Stack 2/3 commands</h4>
+    	<h4>Stack switch command</h4>
     	<p>
-    	    In order to use these commands, type <code>s2</code> for stack 2, or <code>s3</code> for stack 3, then these commands. The second and third stacks are storage only, and can't be used for operations.
+    	    Typing <code>stack #</code> will switch you to that stack. There are three of these.
     	</p>
     	<table>
     	    <tr class=first><td>command</td><td>description</td><td>since</td></tr>
