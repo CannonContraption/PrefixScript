@@ -7,6 +7,9 @@ commandparser prs (&reg);
 
 int main(int argc, char* argv[]){
 	reg.insertcommand("+",     add);
+	reg.insertcommand("-",     sub);
+	reg.insertcommand("*",     mul);
+	reg.insertcommand("/",     div);
 	reg.insertcommand("pop",   stack_pop);
 	reg.insertcommand("popn",  stack_popn);
 	prs.listen();
