@@ -4,4 +4,5 @@
 int main(int argc, char* argv[]){
 	commandregister reg;
 	commandparser   prs (&reg);
+	corelang        lng (&prs, &reg);
 }
