@@ -1,10 +1,9 @@
 #include "corelang.hh"
 
-corelang(commandparser * par, commandregister * reg){
+bool corelang::add(){
+	cout<<"Add function. TBI."<<endl;
+}
+
+corelang::corelang(commandparser * par){
 	cparser = par;
-	cregister = reg;
-	cregister->insertcommand("+", add);
-	cregister->insertcommand("-", sub);
-	cregister->insertcommand("*", mul);
-	cregister->insertcommand("/", div);
 }
