@@ -8,8 +8,13 @@ bool commandparser::listen(){
 	command = "";
 	while(command != "exit"){
 		command = read();
+		if(cin.fail()){
+			break;
+		}
 		if(cmdreg->checkforcommand(command)){
 			cmdreg->runcommand(command);
+		} else {
+			cerr<<"\033[1;31mERROR: \033[0;31mInvalid command:\033[m\033[1;33m "<<command<<"\033[m"<<endl;
 		}
 	}
 }
