@@ -41,6 +41,22 @@ double commandparser::todouble( const string& s ){
     return x;
 }
 
+int commandparser::toint( const string& s ){
+    istringstream i(s);
+    int x;
+    if (!(i >> x))
+        return 0;
+    return x;
+}
+
+void commandparser::setstack(int stacknum){
+	if(stacknum<4&&stacknum>0){
+		currentstorage = stacknum;
+	} else{
+		cerr<<"\033[1;31mERROR: \033[0;31mInvalid stack number.\033[m"<<endl;
+	}
+}
+
 double commandparser::top(){
 	if(!storage[currentstorage].empty())
 		return storage[currentstorage].top();

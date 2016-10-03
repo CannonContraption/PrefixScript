@@ -14,5 +14,6 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("popn",  stack_popn);
 	reg.insertcommand("top",   stack_top);
 	reg.insertcommand("topn",  stack_topn);
+	reg.insertcommand("stack", switchstack);
 	prs.listen();
 }

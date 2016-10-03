@@ -25,3 +25,14 @@ bool stack_topn(){
 	else
 		prs.top();
 }
+
+bool switchstack(){
+	string input = prs.read();
+	int stacknum = prs.toint(input);
+	if(stacknum<4&&stacknum>0){
+		prs.setstack(stacknum);
+	}
+	else{
+		cerr<<"\033[1;31mERROR: \033[0;31mInvalid stack number.\033[m"<<endl;
+	}
+}
