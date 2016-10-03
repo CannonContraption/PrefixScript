@@ -3,6 +3,7 @@
 commandregister reg;
 commandparser prs (&reg);
 #include "corelang/corelang.cc"
+#include "corelang/arithmetic.cc"
 #include "corelang/stackmanagement.cc"
 
 int main(int argc, char* argv[]){
@@ -15,5 +16,7 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("top",   stack_top);
 	reg.insertcommand("topn",  stack_topn);
 	reg.insertcommand("stack", switchstack);
+	reg.insertcommand("c",     commentsearch);
+	reg.insertcommand("print", printtoscreen);
 	prs.listen();
 }
