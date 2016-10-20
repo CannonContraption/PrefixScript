@@ -4,6 +4,9 @@ bool stack_pop(){
 	else
 		prs.pop();
 }
+bool stack_silentpop(){
+	prs.pop();
+}
 
 bool stack_popn(){
 	if(!prs.empty())
