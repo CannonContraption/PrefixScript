@@ -30,3 +30,21 @@ bool printtoscreen(){
 	}
 	cout<<toprint;
 }
+
+bool inputdouble(){
+	double input;
+	cin>>input;
+	prs.store(input);
+}
+
+bool newline(){
+	cout<<endl;
+}
+
+bool vcheck(){
+	string input;
+	cin >> input;
+	while (input != "/vcheck")
+		cin>>input;
+	cout<<"VCheck is broken. Results are not available."<<endl;
+}

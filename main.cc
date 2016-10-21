@@ -5,6 +5,7 @@ commandparser prs (&reg);
 #include "corelang/corelang.cc"
 #include "corelang/arithmetic.cc"
 #include "corelang/stackmanagement.cc"
+#include "corelang/stringmanagement.cc"
 
 int main(int argc, char* argv[]){
 	reg.insertcommand("+",        add);
@@ -19,5 +20,13 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("stack",    switchstack);
 	reg.insertcommand("c",        commentsearch);
 	reg.insertcommand("print",    printtoscreen);
+	reg.insertcommand("input",    inputdouble);
+	reg.insertcommand("sinput",   inputstring);
+	reg.insertcommand("linebreak",newline);
+	reg.insertcommand("strpop",   stringpop);
+	reg.insertcommand("strpopn",  stringpopn);
+	reg.insertcommand("strtop",   strtop);
+	reg.insertcommand("strtopn",  strtopn);
+	reg.insertcommand("vcheck",   vcheck);
 	prs.listen();
 }

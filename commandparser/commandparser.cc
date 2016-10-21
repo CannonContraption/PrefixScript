@@ -93,9 +93,14 @@ string commandparser::strtop(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
 string commandparser::strpop(){
-	string result = strtop();
-	strstorage.pop();
-	return result;
+	if(!strstorage.empty()){
+		string result = strstorage.top();
+		strstorage.pop();
+		return result;
+	}
+	else
+		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
+		return "";
 }
 
 bool commandparser::openfile(){
