@@ -28,5 +28,6 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("strtop",   strtop);
 	reg.insertcommand("strtopn",  strtopn);
 	reg.insertcommand("vcheck",   vcheck);
-	prs.listen();
+	reg.insertcommand("return",   programreturn);
+	return prs.listen();
 }

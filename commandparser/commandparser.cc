@@ -4,9 +4,9 @@ void commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
 
-bool commandparser::listen(){
+int commandparser::listen(){
 	command = "";
-	while(command != "exit"){
+	while(command != "exit" && exitnow == false){
 		command = read();
 		if(cin.fail()){
 			break;
@@ -17,7 +17,16 @@ bool commandparser::listen(){
 			cerr<<"\033[1;31mERROR: \033[0;31mInvalid command:\033[m\033[1;33m "<<command<<"\033[m"<<endl;
 		}
 	}
+	if(exitnow){
+		return returncode;
+	}
 }
+
+void commandparser::exitprogram(int rcd){
+	returncode = rcd;
+	exitnow    = true;
+}
+
 bool exit(){} //Leave this here, leave this empty! Only exists to prevent conflicts in the register!
 
 /* todouble_multsafe turns a string into a double and returns 1 if it can't.

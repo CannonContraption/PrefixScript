@@ -22,6 +22,8 @@ protected:
 	int               repeatindex;
 	bool              repeatread;
 	bool              scriptread;
+	int               returncode;
+	bool              exitnow;
 	
 	fstream           scriptfile;
 	
@@ -37,11 +39,12 @@ public:
 	double            top();
 	bool              empty();
 	bool              strempty();
-	bool              listen();
+	int               listen();
 	void              setstack(int stacknum);
 	double            todouble(const string& s);
 	double            todouble_multsafe(const string& s);
 	int               toint(const string& s);
 	commandparser     (commandregister * r);
+	void              exitprogram(int rcd);
 };
 	

@@ -48,3 +48,10 @@ bool vcheck(){
 		cin>>input;
 	cout<<"VCheck is broken. Results are not available."<<endl;
 }
+
+bool programreturn(){
+	string input = prs.read();
+	int code = prs.toint(input);
+	prs.exitprogram(code);
+	return true;
+}

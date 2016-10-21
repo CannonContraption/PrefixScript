@@ -133,9 +133,8 @@
     	<table>
     	    <tr class=first><td>command</td><td>description</td><td>since</td></tr>
     	    <tr><td>c ... /c</td><td>c starts a comment, /c ends it</td><td>0.009</td></tr>
-    	    <tr><td>quit</td><td>exits the interpreter. Required at the end of every script.</td><td>rpnl</td></tr>
-    	    <tr><td>exit</td><td>same as quit</td><td>rpnl</td></tr>
-    	    <tr><td>return</td><td>When a command is run as a script, determines the value to push back to the main stack on exit. (Similar to return in other languages)</td><td>0.012</td></tr>
+    	    <tr><td>exit</td><td>Exits the interpreter with a return code of 0.</td><td>rpnl, update at 0.018</td></tr>
+    	    <tr><td>return</td><td>Exits the interpreter with a return code of whatever number is entered next.</td><td>0.012, update at 0.018</td></tr>
     	</table>
     	<h2 id="userinteraction">User Interaction</h2>
     	<h3>print</h3>
@@ -189,14 +188,6 @@
     	    Example usage: <code>vcheck 0.009 /vcheck</code> returns <code>Version check results: Version 0.009 confirmed OK with 0.01 (current version)</code>
     	</p>
     	<p>since 0.003</p>
-    	<h3>setfails</h3>
-    	BASIC SYNTAX: <code>setfails #</code><br>
-    	setfails (number of bad commands)<br><br>
-    	<h4>Description</h4>
-    	<p>
-    	    Sets how many invalid commands the interpreter will accept before exiting. This max limit was implemented in order to mitigate problems from programs that don't have an exit statement. This will allow for people working with the interpreter in interactive mode to safely type their code without the metaphorical rug being pulled out from under them.
-    	</p>
-    	<p>since 0.011</p>
     	<h3>function</h3>
     	BASIC SYNATX: <code>function ... ... /function</code><br>
     	function (path to presc function) (arguments for presc function)<br><br>
