@@ -35,3 +35,4 @@ Compiling main.cpp within any c++11 compiler should yield similar results, but i
 
 Have fun!
 
+Note that a rewrite is currently in progress. To see updates to PrefixScript, look to the truemodular branch!
