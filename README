@@ -19,7 +19,7 @@ In order to better demonstrate how simple PrefixScript is, here is an example sc
 
 + 4 5 6 7 /+
 popn
-exit
+^D
 
 You can find this file in "example.presc" if you would like to run it yourself.
 
@@ -31,7 +31,7 @@ In order to run a basic install, it is reccommended that the following tools be 
  - GNU Make
  - g++ (or gcc-c++ etc.)
 
-Compiling main.cpp within any c++11 compiler should yield similar results, but it will not allow for easy installation and further changes to be seamlessly made within the program without constantly recompiling the ENTIRE project.
+Compiling main.cpp with any c++11 compiler should yield similar results, but it will not allow for easy installation and further changes to be seamlessly made within the program without constantly recompiling the ENTIRE project.
 
 Have fun!
 
