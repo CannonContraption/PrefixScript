@@ -1,17 +1,10 @@
-vcheck 0.017 /vcheck
 c
-Welcome to the prefixscript test suite source code!
-This script tests the basic functions of prefixscript
-so that it can be tested during development. If any
-one of these tests fails, it is likely that either your
-compiler lets you compile c++11 code as c++98, or there
-is a rather huge bug in your version of PrefixScript,
-in which case you should file a bug report right away!
+Welcome to the PrefixScript test sute!
+
+This program is supposed to run through some basics of the interpreter and make sure
+everything is in working order.
 /c
-setfails 0
-c
-    if we have any failed commands, then the test suite failed and we should exit, not wait for more to go wrong. (since 0.011)
-/c
+print got this far / /print
 + 0 /+
 if 1 = 1 + pop 1 /+ /if
 if 1 != 1 + pop 0 /+ /else + pop 1 /+ /if
