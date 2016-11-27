@@ -1,9 +1,24 @@
 #include "commandparser.hh"
 
+/*
+ * commandparser::store(value)
+ * 
+ * stores specified value to current stack
+ * 
+ * Arguments:
+ *     value
+ *         double value to push to the stack
+ */
 void commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
 
+/*
+ * commandparser::listen()
+ * 
+ * begins a loop which listens for commands until the user enters exit
+ * or the script ends.
+ */
 int commandparser::listen(){
 	command = "";
 	while(command != "exit" && exitnow == false){
@@ -22,26 +37,60 @@ int commandparser::listen(){
 	}
 }
 
+/*
+ * commandparser::exitprogram(rcd)
+ * 
+ * Instructs the interpreter to exit with a specified return code
+ * 
+ * Arguments
+ *     rcd
+ *         integer return value
+ */
 void commandparser::exitprogram(int rcd){
 	returncode = rcd;
 	exitnow    = true;
 }
 
-bool exit(){} //Leave this here, leave this empty! Only exists to prevent conflicts in the register!
+/*
+ * exit()
+ * 
+ * placeholder command so the command register will not allow the exit
+ * command to be used elsewhere.
+ * 
+ * DO NOT REMOVE THIS EMPTY FUNCTION.
+ * DO NOT ADD CODE TO THIS FUNCTION UNLESS YOU KNOW WHAT YOU'RE DOING.
+ */
+bool exit(){}
 
-/* todouble_multsafe turns a string into a double and returns 1 if it can't.
- * It's multsafe because 1 in multiplication and division doesn't make everything 0*/
+/*
+ * commandparser::todouble_multsafe(&s)
+ * 
+ * command to convert string to double. It is "multsafe" because if
+ * its input can't be converted, it will simply return 1, instead of
+ * zero.
+ * 
+ * Arguments
+ *     &s
+ *         pointer to the string to convert
+ */
 double commandparser::todouble_multsafe( const string& s ){
     istringstream i(s);
     double x;
     if (!(i >> x))
-        //cerr<<"Not a number!"<<endl;
         return 1;
     return x;
 }
 
-//same as above, just defaults to 0 for addition and subtraction
-//default for now
+/*
+ * commandparser::todouble(&s)
+ * 
+ * function to convert string to double. It returns zero if its
+ * input cannot be converted to a double.
+ * 
+ * Arguments:
+ *     &s
+ *         pointer to the string to convert
+ */
 double commandparser::todouble( const string& s ){
     istringstream i(s);
     double x;
@@ -50,6 +99,15 @@ double commandparser::todouble( const string& s ){
     return x;
 }
 
+/*
+ * commandparser::toint(&s)
+ * 
+ * converts string to int
+ * 
+ * Arguments:
+ *     &s
+ *         pointer to string to convert to int
+ */
 int commandparser::toint( const string& s ){
     istringstream i(s);
     int x;
@@ -58,6 +116,15 @@ int commandparser::toint( const string& s ){
     return x;
 }
 
+/*
+ * commandparser::setstack(stacknum)
+ * 
+ * sets the current main storage stack
+ * 
+ * Arguments:
+ *     stacknum
+ *         id number for the stack, between 1 and 3
+ */
 void commandparser::setstack(int stacknum){
 	if(stacknum<4&&stacknum>0){
 		currentstorage = stacknum;
@@ -66,6 +133,11 @@ void commandparser::setstack(int stacknum){
 	}
 }
 
+/*
+ * commandparser::top()
+ * 
+ * grabs the top value from the stack and returns it.
+ */
 double commandparser::top(){
 	if(!storage[currentstorage].empty())
 		return storage[currentstorage].top();
@@ -73,14 +145,29 @@ double commandparser::top(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
 }
 
+/*
+ * commandparser::empty()
+ * 
+ * checks if the current stack is empty and returns that information.
+ */
 bool commandparser::empty(){
 	return storage[currentstorage].empty();
 }
 
+/*
+ * commandparser::strempty()
+ * 
+ * Checks if the string stack is empty and returns that information
+ */
 bool commandparser::strempty(){
 	return strstorage.empty();
 }
 
+/*
+ * commandparser::pop()
+ * 
+ * returns the top value in the stack and removes it
+ */
 double commandparser::pop(){
 	if(!storage[currentstorage].empty()){
 		double result = top();
@@ -91,16 +178,36 @@ double commandparser::pop(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
 }
 
+/*
+ * commandparser::strstore(value)
+ * 
+ * stores a string value to the string stack
+ * 
+ * Arguments:
+ *     value
+ *         the string to store
+ */
 void commandparser::strstore(string value){
 	strstorage.push(value);
 }
 
+/*
+ * commandparser::strtop()
+ * 
+ * returns the top value of the string stack
+ */
 string commandparser::strtop(){
 	if(!strstorage.empty())
 		return strstorage.top();
 	else
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
+
+/*
+ * commandparser::strpop()
+ * 
+ * returns the top value of the string stack then removes it.
+ */
 string commandparser::strpop(){
 	if(!strstorage.empty()){
 		string result = strstorage.top();
@@ -112,16 +219,36 @@ string commandparser::strpop(){
 		return "";
 }
 
+/*
+ * commandparser::openfile()
+ * 
+ * Opens the file to parse for reading as a script file.
+ */
 bool commandparser::openfile(){
 	//This will do stuff with the file object! Promise!
 }
 
+/*
+ * commandparser::setfilename()
+ * 
+ * Sets the file name of whatever script is about to be read
+ * 
+ * Arguments:
+ *     file
+ *         the script filename to open
+ */
 bool commandparser::setfilename(string file){
 	filename = file;
 	if (openfile()) return true;
 	return false;
 }
 
+/*
+ * commandparser::read()
+ * 
+ * Interprets the input file (be it stdin or otherwise) and grabs the next command
+ * using cin>> like syntax. Does not differentiate between \n and ' ' purposefully
+ */
 string commandparser::read(){
 	string toread;
     if(repeatread){
@@ -142,6 +269,17 @@ string commandparser::read(){
     return toread;
 }
 
+/*
+ * commandparser::commandparser(r)
+ * 
+ * Commandparser class constructor
+ * 
+ * takes the command register pointer and sets it for the rest of the class
+ * 
+ * Arguments:
+ *     r
+ *          pointer to the command register which we should be using.
+ */
 commandparser::commandparser(commandregister * r){
 	cmdreg = r;
 	r->insertcommand("exit", exit);
