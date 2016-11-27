@@ -37,6 +37,7 @@ Compiling main.cpp with any c++11 compiler should yield similar results, but it 
 
 Have fun!
 
+<<<<<<< HEAD
 Note that on this branch, there are a few features that haven't been added back yet.
 It is a rewrite to address many issues with the original code that can't easily be fixed without a rewrite.
 
@@ -67,3 +68,6 @@ Please refer to main.cc for additional commands as they appear.
 Also note that while all of these commands work, not all features may work the same as they do in master. Please report any issues using the github issue tracker.
 
 Thank you, and happy coding!
+=======
+Note that a rewrite is currently in progress. To see updates to PrefixScript, look to the truemodular branch!
+>>>>>>> Added note about truemodular
