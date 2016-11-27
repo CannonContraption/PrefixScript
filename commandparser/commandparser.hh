@@ -80,7 +80,7 @@ public:
 	 * 
 	 * for setting file mode, and for reading from a file
 	 */
-	bool              setfilename(char* file);
+	bool              setfilename(string file);
 	/*
 	 * Constructors and exit commands
 	 * 

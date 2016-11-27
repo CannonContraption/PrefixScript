@@ -241,7 +241,7 @@ bool commandparser::openfile(){
  *     file
  *         the script filename to open
  */
-bool commandparser::setfilename(char* file){
+bool commandparser::setfilename(string file){
 	filename = file;
 	if (openfile()) return true;
 	return false;

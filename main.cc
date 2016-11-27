@@ -8,8 +8,9 @@ commandparser prs (&reg);
 #include "corelang/stringmanagement.cc"
 
 int main(int argc, char* argv[]){
-	if(argc>0){
-		prs.setfilename(argv[1]);
+	if(argc>1){
+		string file = argv[1];
+        prs.setfilename(file);
 	}
 	reg.insertcommand("+",        add);
 	reg.insertcommand("-",        sub);
