@@ -26,6 +26,9 @@ int commandparser::listen(){
 		if(cin.fail()){
 			break;
 		}
+		if(scriptread && scriptfile.fail()){
+			break;
+		}
 		if(cmdreg->checkforcommand(command)){
 			cmdreg->runcommand(command);
 		} else {
@@ -225,7 +228,8 @@ string commandparser::strpop(){
  * Opens the file to parse for reading as a script file.
  */
 bool commandparser::openfile(){
-	//This will do stuff with the file object! Promise!
+	scriptfile.open(filename, fstream::in);
+	scriptread = true;
 }
 
 /*
@@ -237,7 +241,7 @@ bool commandparser::openfile(){
  *     file
  *         the script filename to open
  */
-bool commandparser::setfilename(string file){
+bool commandparser::setfilename(char* file){
 	filename = file;
 	if (openfile()) return true;
 	return false;
@@ -251,16 +255,16 @@ bool commandparser::setfilename(string file){
  */
 string commandparser::read(){
 	string toread;
-    if(repeatread){
-        toread = repetitionbuffer[repeatlevel][repeatindex];
-        repeatindex++;
-    } else if(scriptread){
+    if(scriptread){
         scriptfile>>toread;
         if(repeatread){
         	//use tellg and seekg to work this
         	//Repetition buffer turned out to be
         	//kind of clumsy with a file on hand.
         }
+    } else if(repeatread){
+        toread = repetitionbuffer[repeatlevel][repeatindex];
+        repeatindex++;
     } else if(failcount>maxfails){
         toread = "exit";
     } else{
