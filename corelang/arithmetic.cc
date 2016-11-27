@@ -1,3 +1,9 @@
+/*
+ * add()
+ *
+ * function run with the + command
+ * adds numbers until it sees /+
+ */
 bool add(){
 	double sum = 0;
 	string input;
@@ -19,6 +25,12 @@ bool add(){
 	}
 }
 
+/*
+ * sub()
+ *
+ * function run with the - command
+ * subtracts from first number entered until it sees /-
+ */
 bool sub(){
 	double number;
 	double difference;
@@ -51,6 +63,12 @@ bool sub(){
 	return true;
 }
 
+/*
+ * mul()
+ * 
+ * command run with the * command
+ * multiplies all numbers until it sees /*
+ */
 bool mul(){
 	double product = 1;
 	string input;
@@ -68,6 +86,12 @@ bool mul(){
 	}
 }
 
+/*
+ * div()
+ *
+ * function run with / command
+ * divides first number by each succeeding number until it sees //
+ */
 bool div(){
 	double number;
 	double result;
