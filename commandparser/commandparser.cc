@@ -77,11 +77,11 @@ bool exit(){}
  *         pointer to the string to convert
  */
 double commandparser::todouble_multsafe( const string& s ){
-    istringstream i(s);
-    double x;
-    if (!(i >> x))
-        return 1;
-    return x;
+	istringstream i(s);
+	double x;
+	if (!(i >> x))
+		return 1;
+	return x;
 }
 
 /*
@@ -95,11 +95,11 @@ double commandparser::todouble_multsafe( const string& s ){
  *         pointer to the string to convert
  */
 double commandparser::todouble( const string& s ){
-    istringstream i(s);
-    double x;
-    if (!(i >> x))
-        return 0;
-    return x;
+	istringstream i(s);
+	double x;
+	if (!(i >> x))
+		return 0;
+	return x;
 }
 
 /*
@@ -112,11 +112,11 @@ double commandparser::todouble( const string& s ){
  *         pointer to string to convert to int
  */
 int commandparser::toint( const string& s ){
-    istringstream i(s);
-    int x;
-    if (!(i >> x))
-        return 0;
-    return x;
+	istringstream i(s);
+	int x;
+	if (!(i >> x))
+		return 0;
+	return x;
 }
 
 /*
@@ -219,7 +219,7 @@ string commandparser::strpop(){
 	}
 	else
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
-		return "";
+	return "";
 }
 
 /*
@@ -255,22 +255,22 @@ bool commandparser::setfilename(char* file){
  */
 string commandparser::read(){
 	string toread;
-    if(scriptread){
-        scriptfile>>toread;
-        if(repeatread){
-        	//use tellg and seekg to work this
-        	//Repetition buffer turned out to be
-        	//kind of clumsy with a file on hand.
-        }
-    } else if(repeatread){
-        toread = repetitionbuffer[repeatlevel][repeatindex];
-        repeatindex++;
-    } else if(failcount>maxfails){
-        toread = "exit";
-    } else{
-        cin>>toread;
-    }
-    return toread;
+	if(scriptread){
+		scriptfile>>toread;
+		if(repeatread){
+			//use tellg and seekg to work this
+			//Repetition buffer turned out to be
+			//kind of clumsy with a file on hand.
+		}
+	} else if(repeatread){
+		toread = repetitionbuffer[repeatlevel][repeatindex];
+		repeatindex++;
+	} else if(failcount>maxfails){
+		toread = "exit";
+	} else{
+		cin>>toread;
+	}
+	return toread;
 }
 
 /*
