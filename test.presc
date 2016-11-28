@@ -3,16 +3,19 @@ PrefixScript quick test
 
 Acts like the old "test suite" that came with v0.017 and below
 /c
++ 7 8 9 /+
 + 4 5 6 /+
 - 15 5 6 /-
 * 3 5 /*
 / 15 3 //
-pop popn silentpop top topn
+pop linebreak popn silentpop top linebreak topn silentpop
+print stack1 / /print
 stack 2
 + 4 5 6 /+
 stack 1
 popn
 stack 2
+print stack2 / /print
 popn
 print hello world / hello /ns world // / /print
 print input: /print
@@ -21,7 +24,6 @@ input
 popn
 print string input: /print
 sinput
-linebreak
 strtop strtopn strpop
 print again: /print
 sinput
