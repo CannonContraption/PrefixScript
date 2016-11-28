@@ -1,0 +1,28 @@
+c
+PrefixScript quick test
+
+Acts like the old "test suite" that came with v0.017 and below
+/c
++ 4 5 6 /+
+- 15 5 6 /-
+* 3 5 /*
+/ 15 3 //
+pop popn silentpop top topn
+stack 2
++ 4 5 6 /+
+stack 1
+popn
+stack 2
+popn
+print hello world / hello /ns world // / /print
+print input: /print
+input
++ pop 4 /+
+popn
+print string input: /print
+sinput
+linebreak
+strtop strtopn strpop
+print again: /print
+strpopn
+return 8
