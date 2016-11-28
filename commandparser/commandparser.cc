@@ -286,6 +286,7 @@ string commandparser::read(){
  */
 commandparser::commandparser(commandregister * r){
 	cmdreg = r;
+	currentstorage = 1;
 	r->insertcommand("exit", exit);
 }
 
