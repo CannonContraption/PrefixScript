@@ -24,5 +24,6 @@ sinput
 linebreak
 strtop strtopn strpop
 print again: /print
+sinput
 strpopn
 return 8
