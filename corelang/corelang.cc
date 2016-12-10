@@ -31,13 +31,15 @@ bool printtoscreen(){
 		}
 		else if(command == "///"){
 			space = "  ";
+			command = prs.read();
 			continue;
 		}
 		else if(command == "/ns"){
 			space = "";
+			command = prs.read();
 			continue;
 		}
-		toprint += space + command;
+		toprint +=command;
 		space = " ";
 		command = prs.read();
 	}

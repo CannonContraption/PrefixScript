@@ -1,5 +1,0 @@
-c testsuite-functionload.presc is here to test function and file loading capabilities. /c
-if disp = 2
-    + 2.22 /+
-/if
-return pop
