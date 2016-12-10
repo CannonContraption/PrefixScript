@@ -12,17 +12,16 @@ protected:
 	 * to make sure no two commands have the same name. While
 	 * this checking happens at runtime, not compile-time, it
 	 * still is better than no checking, like before.
+	 * 
+	 * Note that there is a pointer for next, this is a single-
+	 * linked list
 	 */
 	struct commandmodule{
 		bool (*function)();
-		string commandname;
+		string command;
+		commandmodule * next;
 	};
-	/*
-	 * Because I'm lazy, these commands are put in a vector
-	 * instead of something which may be more efficient, like
-	 * a linked list.
-	 */
-	vector<commandmodule> commands;
+	commandmodule * head;
 public:
 	/*
 	 * The command register, being very basic, requires no more
