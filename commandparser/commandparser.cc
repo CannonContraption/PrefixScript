@@ -35,6 +35,7 @@ int commandparser::listen(){
 			cerr<<"\033[1;31mERROR: \033[0;31mInvalid command:\033[m\033[1;33m "<<command<<"\033[m"<<endl;
 		}
 	}
+	cmdreg->unlink();
 	if(exitnow){
 		return returncode;
 	}

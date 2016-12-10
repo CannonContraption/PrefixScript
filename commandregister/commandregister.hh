@@ -22,6 +22,7 @@ protected:
 		commandmodule * next;
 	};
 	commandmodule * head;
+	
 public:
 	/*
 	 * The command register, being very basic, requires no more
@@ -31,4 +32,5 @@ public:
 	bool insertcommand(string command, bool(*function)());
 	bool checkforcommand(string command);
 	bool runcommand(string command);
+	void unlink();
 };

@@ -39,3 +39,12 @@ bool commandregister::runcommand(string command){
 	return false;
 }
 
+void commandregister::unlink(){
+	commandmodule * current = head;
+	commandmodule * old = current;
+	while(current){
+		old = current;
+		current = current -> next;
+		delete old;
+	}
+}
