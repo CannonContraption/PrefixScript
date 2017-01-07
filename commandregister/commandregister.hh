@@ -14,7 +14,12 @@ protected:
 	 * still is better than no checking, like before.
 	 * 
 	 * Note that there is a pointer for next, this is a single-
-	 * linked list
+	 * linked list. The reason is because linked lists allow for
+	 * some program commands or features to be disabled and
+	 * enabled on-the-fly, allowing for programs to negotiate
+	 * between competing libraries for available commands by
+	 * disabling conflicting ones before a competing module with
+	 * better support is loaded.
 	 */
 	struct commandmodule{
 		bool (*function)();
