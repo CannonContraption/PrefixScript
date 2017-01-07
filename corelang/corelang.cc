@@ -70,6 +70,26 @@ bool newline(){
 }
 
 /*
+ * if()
+ * 
+ * Function to start looking for conditions in an if statement.
+ * Used in order to allow branching paths and simple logic.
+ */
+bool ifstatement(){
+	string first = prs.read();
+	string compareop = prs.read();
+	string second = prs.read();
+	string commandlist = "";
+	string command = " ";
+	while(command != "/if"){
+		command = prs.read();
+		commandlist+=command+" ";
+	}
+	prs.setrepetitionbuff(commandlist);
+	if(prs.testcondition(first, compareop, second)) prs.execbuff();
+}
+
+/*
  * vcheck()
  * 
  * old version-checking code
