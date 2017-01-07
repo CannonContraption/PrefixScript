@@ -89,7 +89,7 @@ public:
 	* Defines some basic functions for doing repetition and
 	* logic.
 	*/
-	bool              testcondition(string conditionalstring);
+	bool              testcondition(string first, string condition, string second);
 	/*
 	 * Constructors and exit commands
 	 * 
