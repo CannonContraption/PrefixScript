@@ -274,6 +274,61 @@ string commandparser::read(){
 	return toread;
 }
 
+bool commandparser::testcondition(string conditionalstring){
+	char mode = '=';
+	bool fsde = true;
+	string first;
+	string second;
+	for(int i = 0; i<conditionalstring.length(); i++){
+		if(conditionalstring[i] == '='){
+			mode = '=';
+			fsde = false;
+		}
+		else if (conditionalstring[i] == '!'){
+			mode = '!';
+			i++;
+			fsde = false;
+		}
+		else if (conditionalstring[i] == '<'){
+			if(conditionalstring.length()>i+1){
+				if(conditionalstring[i+1]=='=') mode='l';
+				else mode='<';
+			}
+			fsde = false;
+		}
+		else if(conditionalstring[i] == '>'){
+			if(conditionalstring.length()>i+1){
+				if(conditionalstring[i+1]=='=') mode='g';
+				else mode='>';
+			}
+			fsde = false;
+		}
+		else{
+			if(fsde){
+				first+=conditionalstring[i];
+			} else{
+				second += conditionalstring[i];
+			}
+		}
+	}
+	double firstval = todouble(first);
+	double secondval = todouble(second);
+	if(mode == '='){
+		if(firstval == secondval) return true;
+	} else if (mode == '!'){
+		if(firstval != secondval) return true;
+	} else if (mode == 'l'){
+		if(firstval <= secondval) return true;
+	} else if (mode == '<'){
+		if(firstval < secondval) return true;
+	} else if (mode == 'g'){
+		if(firstval >= secondval) return true;
+	} else if (mode == '>'){
+		if(firstval > secondval) return true;
+	}
+	return false;
+}
+
 /*
  * commandparser::commandparser(r)
  * 

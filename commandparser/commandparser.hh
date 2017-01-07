@@ -1,6 +1,7 @@
 #include <stack>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 class commandparser{
 	//We're using the same command register everywhere, so we want
@@ -46,6 +47,7 @@ protected:
 	int               repeatindex;
 	bool              repeatread;
 	vector<string>    repetitionbuffer[32];
+    string            condition;
 	int               repeatlevel; //Stacks, so nested loops work
 	/*
 	 * Memory
@@ -81,6 +83,13 @@ public:
 	 * for setting file mode, and for reading from a file
 	 */
 	bool              setfilename(string file);
+	/*
+	* Loop and Branching Path control
+	* 
+	* Defines some basic functions for doing repetition and
+	* logic.
+	*/
+	bool              testcondition(string conditionalstring);
 	/*
 	 * Constructors and exit commands
 	 * 
