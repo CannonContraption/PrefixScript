@@ -24,6 +24,7 @@ protected:
 	string            filename;
 	bool              scriptread;
 	fstream           scriptfile;
+	vector<istringstream> repeatbuff;
 	bool              openfile();
 	/*
 	 * Storage commands
@@ -46,9 +47,10 @@ protected:
 	char              repeatmode[32];
 	int               repeatindex;
 	bool              repeatread;
-	vector<string>    repetitionbuffer[32];
-    string            condition;
-	int               repeatlevel; //Stacks, so nested loops work
+	bool              previousrepeat;
+	vector<string>    repetitionbuffer;
+	int               repeatlevel;
+	string            condition;
 	/*
 	 * Memory
 	 * 
@@ -90,6 +92,10 @@ public:
 	* logic.
 	*/
 	bool              testcondition(string first, string condition, string second);
+	void              setrepetitionbuff(string buff);
+	void              increaserepeatlevel();
+	void              decreaserepeatlevel();
+	void              execbuff();
 	/*
 	 * Constructors and exit commands
 	 * 

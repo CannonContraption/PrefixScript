@@ -264,14 +264,37 @@ string commandparser::read(){
 			//kind of clumsy with a file on hand.
 		}
 	} else if(repeatread){
-		toread = repetitionbuffer[repeatlevel][repeatindex];
-		repeatindex++;
+		repeatbuff[repeatlevel]>>repetitionbuffer[repeatlevel];
+		if(repeatbuff[repeatlevel].fail()){
+			if(previousrepeat == false) repeatread = false;
+			repetitionbuffer.pop_back();
+			repeatlevel--;
+		}
 	} else if(failcount>maxfails){
 		toread = "exit";
 	} else{
 		cin>>toread;
 	}
 	return toread;
+}
+
+void commandparser::setrepetitionbuff(string buff){
+	repetitionbuffer.emplace_back(buff);
+	repeatlevel++;
+}
+
+void commandparser::execbuff(){
+	previousrepeat = false;
+	if(repeatread) previousrepeat = true;
+	repeatread=true;
+}
+
+void commandparser::increaserepeatlevel(){
+	repeatlevel++;
+}
+
+void commandparser::decreaserepeatlevel(){
+	repeatlevel--;
 }
 
 bool commandparser::testcondition(string first, string condition, string second){
@@ -316,6 +339,7 @@ bool commandparser::testcondition(string first, string condition, string second)
  */
 commandparser::commandparser(commandregister * r){
 	cmdreg = r;
+	repeatlevel=-1;
 	currentstorage = 1;
 	r->insertcommand("exit", exit);
 }
