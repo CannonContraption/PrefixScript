@@ -34,5 +34,7 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("vcheck",   vcheck);
 	reg.insertcommand("return",   programreturn);
 	reg.insertcommand("if",       ifstatement);
+	reg.insertcommand("memstore", memstore);
+	reg.insertcommand("memrecall",memrecall);
 	return prs.listen();
 }

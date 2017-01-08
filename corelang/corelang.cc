@@ -11,6 +11,19 @@ bool commentsearch(){
 	}
 }
 
+bool memstore(){
+	string getval = prs.read();
+	int pos = prs.toint(getval);
+	double value = prs.top();
+	prs.memstore(pos, value);
+}
+
+bool memrecall(){
+	string getval = prs.read();
+	int pos = prs.toint(getval);
+	prs.store(prs.memrecall(pos));
+}
+
 /*
  * printtoscreen()
  *
