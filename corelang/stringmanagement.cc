@@ -7,7 +7,8 @@
  */
 bool inputstring(){
 	string input;
-	cin>>input;
+	if(!prs.getScriptRead()) cin.get();
+	getline(cin,input);
 	prs.strstore(input);
 }
 
