@@ -82,9 +82,15 @@ bool ifstatement(){
 	string commandlist = "";
 	string command = " ";
 	bool   ifok = prs.testcondition(first, compareop, second);
-	while(command != "/if"){
+	while(command != "/if" && command != "/else"){
 		command = prs.read();
 		if(ifok && reg.checkforcommand(command)) reg.runcommand(command);
+	}
+	if(command == "/else"){
+		while (command != "/if") {
+			command = prs.read();
+			if (!ifok && reg.checkforcommand(command)) reg.runcommand(command);
+		}
 	}
 }
 
