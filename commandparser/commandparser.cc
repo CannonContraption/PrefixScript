@@ -29,6 +29,7 @@ int commandparser::listen(){
 		if(scriptread && scriptfile.fail()){
 			break;
 		}
+		if(repeatread && repeatindex[repeatlevel] == repetitionbuffer[repeatlevel].length()-3) return returncode;
 		if(cmdreg->checkforcommand(command)){
 			cmdreg->runcommand(command);
 		} else {
@@ -264,12 +265,17 @@ string commandparser::read(){
 			//kind of clumsy with a file on hand.
 		}
 	} else if(repeatread){
-		repeatbuff[repeatlevel]>>repetitionbuffer[repeatlevel];
-		if(repeatbuff[repeatlevel].fail()){
-			if(previousrepeat == false) repeatread = false;
-			repetitionbuffer.pop_back();
+		if(repeatindex[repeatlevel] >= repetitionbuffer[repeatlevel].length()-2){
+			repeatread = false;
 			repeatlevel--;
+			return "";
 		}
+		for(int i = repeatindex[repeatlevel]; i<repetitionbuffer[repeatlevel].length(); i++){
+			repeatindex[repeatlevel] = i;
+			if(repetitionbuffer[repeatlevel][i] ==  ' ' ||  repetitionbuffer[repeatlevel][i] ==  '	' || repetitionbuffer[repeatlevel][i] == '\n') break;
+			toread += repetitionbuffer[repeatlevel][i];
+		}
+		cout << "repeat read " << toread << endl;
 	} else if(failcount>maxfails){
 		toread = "exit";
 	} else{
@@ -280,13 +286,19 @@ string commandparser::read(){
 
 void commandparser::setrepetitionbuff(string buff){
 	repetitionbuffer.emplace_back(buff);
-	repeatlevel++;
+	repeatindex.emplace_back(0);
+	repeatlevel = repeatindex.size()-1;
 }
 
 void commandparser::execbuff(){
+	cout << "gotexecbuff" << endl;
 	previousrepeat = false;
 	if(repeatread) previousrepeat = true;
 	repeatread=true;
+	while(repeatread) {
+		cmdreg->runcommand(read());
+		cout << "running command..." << endl;
+	}
 }
 
 void commandparser::increaserepeatlevel(){
@@ -308,20 +320,32 @@ bool commandparser::testcondition(string first, string condition, string second)
 		if(condition[i] == '>')                mode = '>';
 		if(condition[i] == '=' && mode == '>') mode = 'g';
 	}
-	double firstval = todouble(first);
-	double secondval = todouble(second);
+	double firstdbl;
+	double seconddbl;
+	if(first ==  "pop")
+		firstdbl = pop();
+    else if (first ==  "top")
+        firstdbl = top();
+	else
+		firstdbl = todouble(first);
+	if(second ==  "pop")
+		seconddbl = pop();
+    else if (second == "top")
+        seconddbl = top();
+	else
+		seconddbl = todouble(second);
 	if(mode == '='){
-		if(firstval == secondval) return true;
+		if(firstdbl == seconddbl) return true;
 	} else if (mode == '!'){
-		if(firstval != secondval) return true;
+		if(firstdbl != seconddbl) return true;
 	} else if (mode == 'l'){
-		if(firstval <= secondval) return true;
+		if(firstdbl <= seconddbl) return true;
 	} else if (mode == '<'){
-		if(firstval < secondval) return true;
+		if(firstdbl < seconddbl) return true;
 	} else if (mode == 'g'){
-		if(firstval >= secondval) return true;
+		if(firstdbl >= seconddbl) return true;
 	} else if (mode == '>'){
-		if(firstval > secondval) return true;
+		if(firstdbl > seconddbl) return true;
 	}
 	return false;
 }

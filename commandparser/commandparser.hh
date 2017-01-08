@@ -24,7 +24,6 @@ protected:
 	string            filename;
 	bool              scriptread;
 	fstream           scriptfile;
-	vector<istringstream> repeatbuff;
 	bool              openfile();
 	/*
 	 * Storage commands
@@ -45,7 +44,7 @@ protected:
 	int               repeatlower[32];
 	int               repeatupper[32];
 	char              repeatmode[32];
-	int               repeatindex;
+	vector<int>       repeatindex;
 	bool              repeatread;
 	bool              previousrepeat;
 	vector<string>    repetitionbuffer;
