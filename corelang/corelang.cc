@@ -81,12 +81,11 @@ bool ifstatement(){
 	string second = prs.read();
 	string commandlist = "";
 	string command = " ";
+	bool   ifok = prs.testcondition(first, compareop, second);
 	while(command != "/if"){
 		command = prs.read();
-		commandlist+=command+" ";
+		if(ifok && reg.checkforcommand(command)) reg.runcommand(command);
 	}
-	prs.setrepetitionbuff(commandlist);
-	if(prs.testcondition(first, compareop, second)) prs.execbuff();
 }
 
 /*
