@@ -309,6 +309,10 @@ void commandparser::decreaserepeatlevel(){
 	repeatlevel--;
 }
 
+bool commandparser::getScriptRead(){
+	return scriptread;
+}
+
 bool commandparser::testcondition(string first, string condition, string second){
 	char mode = ' ';
 	bool fsde = true;
@@ -348,6 +352,14 @@ bool commandparser::testcondition(string first, string condition, string second)
 		if(firstdbl > seconddbl) return true;
 	}
 	return false;
+}
+
+void commandparser::memstore(int pos, double value){
+	memory[pos] = value;
+}
+
+double commandparser::memrecall(int pos){
+	return memory[pos];
 }
 
 /*

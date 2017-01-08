@@ -78,6 +78,8 @@ public:
 	double            todouble(const string& s);
 	double            todouble_multsafe(const string& s);
 	int               toint(const string& s);
+	void              memstore(int pos, double value);
+	double            memrecall(int pos);
 	/*
 	 * File io commands
 	 * 
@@ -105,5 +107,7 @@ public:
 	 */
 	commandparser     (commandregister * r);
 	void              exitprogram(int rcd);
+
+	bool getScriptRead();
 };
 	
