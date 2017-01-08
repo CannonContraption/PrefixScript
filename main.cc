@@ -6,6 +6,7 @@ commandparser prs (&reg);
 #include "corelang/arithmetic.cc"
 #include "corelang/stackmanagement.cc"
 #include "corelang/stringmanagement.cc"
+#include "corelang/math.cc"
 
 int main(int argc, char* argv[]){
 	if(argc>1){
@@ -36,5 +37,6 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("if",       ifstatement);
 	reg.insertcommand("memstore", memstore);
 	reg.insertcommand("memrecall",memrecall);
+	reg.insertcommand("math",     advancedmath);
 	return prs.listen();
 }
