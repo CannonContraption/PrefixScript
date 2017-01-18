@@ -7,6 +7,7 @@ commandparser prs (&reg);
 #include "corelang/stackmanagement.cc"
 #include "corelang/stringmanagement.cc"
 #include "corelang/math.cc"
+#include "corelang/repetition.cc"
 
 int main(int argc, char* argv[]){
 	if(argc>1){
