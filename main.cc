@@ -39,5 +39,6 @@ int main(int argc, char* argv[]){
 	reg.insertcommand("memstore", memstore);
 	reg.insertcommand("memrecall",memrecall);
 	reg.insertcommand("math",     advancedmath);
+	reg.insertcommand("string",   codestring);
 	return prs.listen();
 }

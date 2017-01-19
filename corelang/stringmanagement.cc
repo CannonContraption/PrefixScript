@@ -65,3 +65,39 @@ bool strtopn(){
 	else
 		prs.strtop();
 }
+
+/*
+codestring()
+
+Function used to add strings, similar to setting a string variable in
+C++. Syntax is similar to the print statement, using the same escape
+format. This is in part because it works, and in part because the code
+is shared between the two, with only the end action actually changing.
+*/
+bool codestring(){
+	string command = prs.read();
+	string toprint = "";
+	string space = "";
+	while(command != "/string"){
+		if(command == "/"){
+			command = "\n";
+		}
+		else if(command == "//"){
+			command = "/";
+		}
+		else if(command == "///"){
+			space = "  ";
+			command = prs.read();
+			continue;
+		}
+		else if(command == "/ns"){
+			space = "";
+			command = prs.read();
+			continue;
+		}
+		toprint +=command;
+		space = " ";
+		command = prs.read();
+	}
+	prs.strstore(toprint);
+}
