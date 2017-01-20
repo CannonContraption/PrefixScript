@@ -3,27 +3,26 @@
 #include <sstream>
 #include <string>
 
+
+/*! \brief The command parser
+ * 
+ * Class built for parsing and interpreting core language functions, such as handling logic
+ * and IO for individual commands. It is built as a class in order to allow broader access to
+ * its functions, and to potentially allow multiple copies to run simultaniously.
+ */
 class commandparser{
-	//We're using the same command register everywhere, so we want
-	//to use a pointer in order to prevent the program from copying
-	//the one we already have.
-	commandregister   *cmdreg;
+	commandregister   *cmdreg; //!< Pointer to the global command register object.
 protected:
-	/*
-	 * basic common variables
-	 * 
-	 * Stuff that's common to most commands and used often
-	 */
-	string            command;
+	string            command; //!< Current command. Used for recursive parsing.
 	/*
 	 * File-read stuff
 	 * 
 	 * stdin vs. file stuff
 	 */
-	bool              isfile;
-	string            filename;
-	bool              scriptread;
-	fstream           scriptfile;
+	bool              isfile; //!< Tells the program whether we're dealing with stdin or a file
+	string            filename; //!< File name should we be using one
+	bool              scriptread; //!< tells the program whether we're reading a script.
+	fstream           scriptfile; //!< File stream to use instead of std::cin when reading from a file
 	bool              openfile();
 	/*
 	 * Storage commands
@@ -31,33 +30,33 @@ protected:
 	 * Used for storing values. Also variables to select which
 	 * storage stack to use
 	 */
-	stack<double>     storage[3];
-	stack<string>     strstorage;
-	int               currentstorage;
+	stack<double>     storage[3]; //!< Our three storage stacks, used for storing all output
+	stack<string>     strstorage; //!< String storage stack, same as double one but for strings
+	int               currentstorage; //!< Which storage stack we're using right now (1-3)
 	//Old fail count code, need to check if this is still used
-	int               failcount;
-	int               maxfails;
+	int               failcount; //!< Deprecated count of failed commands. Has been succeeded by EOF support
+	int               maxfails; //!< Deprecated maximum number of failed commands. Has been succeeded by EOF support
 	/*
 	 * File-based repetition variables, allowing for 32 nested
 	 * loops controlled by start and end line numbers.
 	 */
-	int               repeatlower[32];
-	int               repeatupper[32];
-	char              repeatmode[32];
-	vector<int>       repeatindex;
-	bool              repeatread;
-	bool              previousrepeat;
-	vector<string>    repetitionbuffer;
-	int               repeatlevel;
-	string            condition;
+	int               repeatlower[32]; //!< Lower repetition buffer line number
+	int               repeatupper[32]; //!< upper repetition buffer line number
+	char              repeatmode[32]; //!< Function for each level of the repetition buffer
+	vector<int>       repeatindex; //!< What line the buffer is currently executing
+	bool              repeatread; //!< representation of whether we're reading from the repeition buffer
+	bool              previousrepeat; //!< previous repetition buffer level
+	vector<string>    repetitionbuffer; //!< the repetition buffers themselves live here
+	int               repeatlevel; //!< current level of repeat. a loop in a loop would have index 1
+	string            condition; //!< conditional string used for testing truth
 	/*
 	 * Memory
 	 * 
 	 * 32 stack-independant memory slots
 	 */
-	double            memory[32];
-	int               returncode;
-	bool              exitnow;
+	double            memory[32]; //!< 32 double values for memory (like a calculator)
+	int               returncode; //!< return code for the script, and possibly the interpreter
+	bool              exitnow; //!< tells the command listener whether to exit right now
 public:
 	/*
 	 * Global commands

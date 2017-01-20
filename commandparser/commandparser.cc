@@ -1,23 +1,25 @@
 #include "commandparser.hh"
 
-/*
- * commandparser::store(value)
+/*!
+ * \brief Stores the value it gets to the stack
  * 
- * stores specified value to current stack
- * 
- * Arguments:
- *     value
- *         double value to push to the stack
+ * Takes whatever value is passed, and then stores it to the currently selected
+ * stack.
  */
 void commandparser::store(double value){
 	storage[currentstorage].push(value);
 }
 
-/*
- * commandparser::listen()
+/*!
+ * \brief Listens for commands
  * 
- * begins a loop which listens for commands until the user enters exit
- * or the script ends.
+ * Listens for the user to type a new command.
+ * 
+ * This function reads from script files and std::cin alike. It is responsible for
+ * fetching the next command, dealing with the repetition buffer, and exiting when
+ * its time has come. It also does cleanup for the command register on interpreter
+ * exit. This needs to be run every time the interpreter runs and every time a new
+ * level of recursion is read to be executed.
  */
 int commandparser::listen(){
 	command = "";
@@ -42,41 +44,35 @@ int commandparser::listen(){
 	}
 }
 
-/*
- * commandparser::exitprogram(rcd)
+/*!
+ * \brief exits the program or loop with the specified return code
  * 
- * Instructs the interpreter to exit with a specified return code
- * 
- * Arguments
- *     rcd
- *         integer return value
+ * Tells the command listener when we're ready to exit and with what return code
+ * to do so.
  */
 void commandparser::exitprogram(int rcd){
 	returncode = rcd;
 	exitnow    = true;
 }
 
-/*
- * exit()
+/*!
+ * \brief does nothing, placeholder for the command register
  * 
- * placeholder command so the command register will not allow the exit
- * command to be used elsewhere.
- * 
- * DO NOT REMOVE THIS EMPTY FUNCTION.
- * DO NOT ADD CODE TO THIS FUNCTION UNLESS YOU KNOW WHAT YOU'RE DOING.
+ * The command register needs to have a command for everything it runs else the interpreter
+ * will throw an error at the user. In order to allow the parser to handle exit and to prevent
+ * other modules from taking over the command themselves, this blank function has been added
+ * to fill the gap.
  */
 bool exit(){}
 
-/*
- * commandparser::todouble_multsafe(&s)
+/*!
+ * \brief standard way to convert to a double, defaults to 1
  * 
- * command to convert string to double. It is "multsafe" because if
- * its input can't be converted, it will simply return 1, instead of
- * zero.
+ * This function is built for use throughout the program in order to convert strings to numbers
+ * in a standard way.
  * 
- * Arguments
- *     &s
- *         pointer to the string to convert
+ * When it gets a string it can't convert to a number, this will return 1 (which doesn't affect
+ * muliplication operations, thus it is named the multiplication-safe (multsafe) version).
  */
 double commandparser::todouble_multsafe( const string& s ){
 	istringstream i(s);
@@ -86,15 +82,14 @@ double commandparser::todouble_multsafe( const string& s ){
 	return x;
 }
 
-/*
- * commandparser::todouble(&s)
+/*!
+ * \brief standard way to convert to a double, defaults to 0
  * 
- * function to convert string to double. It returns zero if its
- * input cannot be converted to a double.
+ * This function is built for use throughout the program in order to convert strings to numbers
+ * in a standard way.
  * 
- * Arguments:
- *     &s
- *         pointer to the string to convert
+ * When it gets a string it can't convert to a number, this will return 0 (so that it won't
+ * contribute to a sum if it fails).
  */
 double commandparser::todouble( const string& s ){
 	istringstream i(s);
@@ -104,14 +99,11 @@ double commandparser::todouble( const string& s ){
 	return x;
 }
 
-/*
- * commandparser::toint(&s)
+/*! \brief standard way to convert to an int, defaults to 0
  * 
- * converts string to int
- * 
- * Arguments:
- *     &s
- *         pointer to string to convert to int
+ * This function is a standard way to convert a string to an integer, such as in places where there
+ * is a need of an index number. It is written to prevent the need for a specific integer-based read
+ * command while still providing a conversion method for other parts of the program.
  */
 int commandparser::toint( const string& s ){
 	istringstream i(s);
@@ -121,14 +113,11 @@ int commandparser::toint( const string& s ){
 	return x;
 }
 
-/*
- * commandparser::setstack(stacknum)
+/*! \brief sets the current stack number.
  * 
- * sets the current main storage stack
- * 
- * Arguments:
- *     stacknum
- *         id number for the stack, between 1 and 3
+ * Switches to whatever stack number is passed. This checks to make sure the number is in range, and
+ * if it is, it sets the current stack number in order to tell the interpreter where to store and read
+ * numbers from.
  */
 void commandparser::setstack(int stacknum){
 	if(stacknum<4&&stacknum>0){
@@ -138,10 +127,12 @@ void commandparser::setstack(int stacknum){
 	}
 }
 
-/*
- * commandparser::top()
+/*! \brief grabs the top stack number and returns it
  * 
- * grabs the top value from the stack and returns it.
+ * Checks whether the current stack is empty. If it is, the interpreter screams profanity (gently) at
+ * the user. If it isn't, it returns the top number from the stack without removing or adding anything.
+ * 
+ * Obeys the currentstorage attribute
  */
 double commandparser::top(){
 	if(!storage[currentstorage].empty())
@@ -150,28 +141,29 @@ double commandparser::top(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
 }
 
-/*
- * commandparser::empty()
+/*!
+ * \brief checks if the current stack is empty
  * 
- * checks if the current stack is empty and returns that information.
+ * literally just pipes the return code of the stack's internal empty() function. This returns true if
+ * it's actually empty. Used to allow the program to always check the current stack without specifying
+ * that every time.
  */
 bool commandparser::empty(){
 	return storage[currentstorage].empty();
 }
 
-/*
- * commandparser::strempty()
+/*! \brief checks if the string storage is empty
  * 
- * Checks if the string stack is empty and returns that information
+ * Similar to the empty() function, but this time it checks the string stack instead of the default
+ * double stack.
  */
 bool commandparser::strempty(){
 	return strstorage.empty();
 }
 
-/*
- * commandparser::pop()
+/*! \brief pops the stack
  * 
- * returns the top value in the stack and removes it
+ * Returns the top number from the stack and removes it. Exactly the same as true RPN pop.
  */
 double commandparser::pop(){
 	if(!storage[currentstorage].empty()){
@@ -183,23 +175,16 @@ double commandparser::pop(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
 }
 
-/*
- * commandparser::strstore(value)
- * 
- * stores a string value to the string stack
- * 
- * Arguments:
- *     value
- *         the string to store
+/*! \brief stores a string to the string stack
  */
 void commandparser::strstore(string value){
 	strstorage.push(value);
 }
 
-/*
- * commandparser::strtop()
+/*! \brief returns the top string on the string stack
  * 
- * returns the top value of the string stack
+ * Checks if the string stack is empty. If it is, it throws a fit to politely inform the user of their
+ * egregious error. Otherwise it returns the top string without touching the stack's contents.
  */
 string commandparser::strtop(){
 	if(!strstorage.empty())
@@ -208,10 +193,10 @@ string commandparser::strtop(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
 
-/*
- * commandparser::strpop()
+/*! \brief returns the top string on the string stack and pops it
  * 
- * returns the top value of the string stack then removes it.
+ * Checks if the string stack is empty. If it isn't, returns the top string on the string stack and then
+ * pops it. If it is empty, rants at the user about how they just tried to read a blank book.
  */
 string commandparser::strpop(){
 	if(!strstorage.empty()){
@@ -224,24 +209,21 @@ string commandparser::strpop(){
 	return "";
 }
 
-/*
- * commandparser::openfile()
+/*!
+ * \brief Opens the file to parse for reading as a script file.
  * 
- * Opens the file to parse for reading as a script file.
+ * Function to start the script read mode. This opens the script file, and sets the scriptread
+ * bit so that the listener knows we're reading from a file instead of std::cin
  */
 bool commandparser::openfile(){
 	scriptfile.open(filename, fstream::in);
 	scriptread = true;
 }
 
-/*
- * commandparser::setfilename()
+/*! \brief Sets the file name to read from
  * 
- * Sets the file name of whatever script is about to be read
- * 
- * Arguments:
- *     file
- *         the script filename to open
+ * Sets the file name to read from and sets the interpreter on its way to open that file. If it
+ * succeeds, it returns truth. Otherwise it returns lies (returns false).
  */
 bool commandparser::setfilename(string file){
 	filename = file;
@@ -249,11 +231,13 @@ bool commandparser::setfilename(string file){
 	return false;
 }
 
-/*
- * commandparser::read()
+/*! \brief grabs the next command to execute and returns it
  * 
- * Interprets the input file (be it stdin or otherwise) and grabs the next command
- * using cin>> like syntax. Does not differentiate between \n and ' ' purposefully
+ * The read function is responsible in large part for making sure that the interpreter can always
+ * fetch the next space-separated string. It is responsible for determining what to read from where
+ * and then returning that to the user. It plays an even greater role in scripting and use of the
+ * repetition buffer because it's designed to abstract that distinction from individual commands so
+ * they don't have to care where they're reading from.
  */
 string commandparser::read(){
 	string toread;
@@ -284,12 +268,22 @@ string commandparser::read(){
 	return toread;
 }
 
+/*! \brief Sets the contents of the next repetition buffer
+ * 
+ * Sets the string contents of the next repetition buffer, allowing for commands in a loop to be properly
+ * repeated. This also feeds the [read](@ref read) command by giving it stuff to read when we're repeating stuff.
+ */
 void commandparser::setrepetitionbuff(string buff){
 	repetitionbuffer.emplace_back(buff);
 	repeatindex.emplace_back(0);
 	repeatlevel = repeatindex.size()-1;
 }
 
+/*! \brief Executes the current repetition buffer once.
+ * 
+ * When a command finishes recording what it wants to do with the repetition buffer and decides whether there 
+ * is truth in its conditional statement, this tells [read()](@ref read) to read from the repetition buffer again.
+ */
 void commandparser::execbuff(){
 	cout << "gotexecbuff" << endl;
 	previousrepeat = false;
@@ -301,18 +295,42 @@ void commandparser::execbuff(){
 	}
 }
 
+/*! \brief Increases the repetition buffer level
+ * 
+ * Tells the interpreter we've got one more nested loop.
+ */
 void commandparser::increaserepeatlevel(){
 	repeatlevel++;
 }
 
+/*! \brief Decreases the repetition buffer level
+ * 
+ * Tells the interpreter we've got one less nested loop.
+ */
 void commandparser::decreaserepeatlevel(){
 	repeatlevel--;
 }
 
+/*! \brief checks whether we're reading from a script and returns that information
+ * 
+ * In most cases this should not be done, simply because the design of the interpreter is such
+ * that a command should not need to know whether we're reading from a script or not, however,
+ * there are border cases where we need this information to direct program flow.
+ * 
+ * This facilitates those border cases while not allowing the rest of the interpreter (or other
+ * commands) to change this value without good reason and the support of another part of the
+ * command parser.
+ */
 bool commandparser::getScriptRead(){
 	return scriptread;
 }
 
+/*! \brief tests a conditional statement based on three read() results
+ * 
+ * Tests for truth using the lanugage's native syntax. Takes a first and second string, and
+ * compares them based on a conditional string in the middle. These conditionals should be space
+ * separated.
+ */
 bool commandparser::testcondition(string first, string condition, string second){
 	char mode = ' ';
 	bool fsde = true;
@@ -354,24 +372,25 @@ bool commandparser::testcondition(string first, string condition, string second)
 	return false;
 }
 
+/*! \brief stores a value into a memory slot
+ * 
+ * Stores a value into a memory slot.
+ */
 void commandparser::memstore(int pos, double value){
 	memory[pos] = value;
 }
 
+/*! \brief recalls a memory value based on its slot number.
+ * 
+ * Recalls a memory slot. Function similar to a mult-memory calculator.
+ */
 double commandparser::memrecall(int pos){
 	return memory[pos];
 }
 
-/*
- * commandparser::commandparser(r)
+/*! \brief command parser constructor
  * 
- * Commandparser class constructor
- * 
- * takes the command register pointer and sets it for the rest of the class
- * 
- * Arguments:
- *     r
- *          pointer to the command register which we should be using.
+* Initializes the command parser and sets the active command register.
  */
 commandparser::commandparser(commandregister * r){
 	cmdreg = r;

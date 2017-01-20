@@ -1,9 +1,24 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
+/*! \brief The command register, responsible for determining what commands are and what they do
+ * 
+ * The command register is the main guts of the interpreter. It links together a command to a function,
+ * allowing for quick access to all commands in use, and quick runtime error checking to make sure there
+ * is no overlap. This kind of system effectively allows us to not only check for new commands, but also
+ * it allows us to quicky find associated functions without tons of superfluous logic. In the future, it
+ * may even be possible to allow the script writer to enable and disable language functions on an individual
+ * basis instead of relying on plugins (should they ever exist) to not overlap commands themselves. This
+ * also would allow the scripter to possibly rename conflicting commands, and it adds an enormous amount of
+ * flexability to the programming language itself.
+ * 
+ * This is also the whole reason why the interpreter was rewritten.
+ */
 class commandregister{
 protected:
-	/*
+	/*! \brief Commandmodule single link structure
+	 * 
 	 * The commandmodule struct is the basis of the command
 	 * register. It acts as the central object by which
 	 * commands are searched for. When a person types a string,
@@ -22,18 +37,13 @@ protected:
 	 * better support is loaded.
 	 */
 	struct commandmodule{
-		bool (*function)();
-		string command;
-		commandmodule * next;
+		bool (*function)(); /*!< Pointer to the function we'll run */
+		string command; /*!< What the user types to make function() happen. */
+		commandmodule * next; /*!< The next command in our list. */
 	};
-	commandmodule * head;
+	commandmodule * head; /*!< the head of the register list */
 	
 public:
-	/*
-	 * The command register, being very basic, requires no more
-	 * than a check, run, and insert command. It does no more
-	 * than just store the commands we have at our disposal.
-	 */
 	bool insertcommand(string command, bool(*function)());
 	bool checkforcommand(string command);
 	bool runcommand(string command);

@@ -1,8 +1,8 @@
-/*
- * add()
- *
- * function run with the + command
- * adds numbers until it sees /+
+/*! \brief Simple addition command
+ * 
+ * Function run on add command. Performs addition on all the elements inside + and /+.
+ * The function also parses when there is a pop or top command so that it can manipulate
+ * numbers already in the stack.
  */
 bool add(){
 	double sum = 0;
@@ -25,11 +25,7 @@ bool add(){
 	}
 }
 
-/*
- * sub()
- *
- * function run with the - command
- * subtracts from first number entered until it sees /-
+/*! \brief Simple subtraction command
  */
 bool sub(){
 	double number;
