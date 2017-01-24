@@ -1,8 +1,7 @@
-/*
- * commentsearch()
- *
- * function run when the c command is executed
- * prevents the interpreter from doing anything until it sees /c
+/*! \brief Comment handler
+
+Function handes "c" command, allowing the program to handle comments correctly by doing nothing
+until it sees /c
  */
 bool commentsearch(){
 	string command;
@@ -24,12 +23,10 @@ bool memrecall(){
 	prs.store(prs.memrecall(pos));
 }
 
-/*
- * printtoscreen()
- *
- * command run when the print command is executed
- * prints everything it reads until it sees /print
- * includes some workarounds for PrefixScript's more peculiar tendancies
+/*! \brief Print command handler
+
+Takes print statement and then interprets the contained commands and outputs formatted text based
+on whatever the user typed
  */
 bool printtoscreen(){
 	string command = prs.read();
@@ -59,12 +56,9 @@ bool printtoscreen(){
 	cout<<toprint;
 }
 
-/*
- * inputdouble()
- *
- * function run on input command
- * searches cin for a double whether or not we are reading from a script.
- * useful for when we want user input.
+/*! \brief Handles the input command
+
+When the user types input, this launches. It cin's a double and stores it to the stack.
  */
 bool inputdouble(){
 	double input;
@@ -72,21 +66,18 @@ bool inputdouble(){
 	prs.store(input);
 }
 
-/*
- * newline()
- *
- * function run on linebreak command
- * adds a line break.
+/*! \brief linebreak command handler
+
+Adds a line break on the linebreak command
  */
 bool newline(){
 	cout<<endl;
 }
 
-/*
- * if()
- * 
- * Function to start looking for conditions in an if statement.
- * Used in order to allow branching paths and simple logic.
+/*! \brief basic logic if statement
+
+On the if command reads for a logical statement. (value = value) Computes truth and executes the following code up to
+/else or /if. If /else exists, it executes that if the logical statement was false.
  */
 bool ifstatement(){
 	string first = prs.read();
@@ -107,13 +98,9 @@ bool ifstatement(){
 	}
 }
 
-/*
- * vcheck()
- * 
- * old version-checking code
- * used to ensure script compatiblity during developement as a sort of
- * check to make sure that the code had been modified when the version
- * number went up
+/*! \brief Old VCheck placeholder
+
+Placeholder for version check command.
  */
 bool vcheck(){
 	string input;
@@ -123,12 +110,10 @@ bool vcheck(){
 	cout<<"VCheck is broken. Results are not available."<<endl;
 }
 
-/*
- * programreturn()
- *
- * function run on return command
- * causes the interpreter to return with the next entered number as the
- * return code.
+/*! \brief Define return code and exit
+
+Takes a function and pushes its return to the stack, or if not in a function, exits the interpreter with a specific
+return code.
  */
 bool programreturn(){
 	string input = prs.read();

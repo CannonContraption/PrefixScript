@@ -1,9 +1,6 @@
-/*
- * inputstring()
- *
- * function run on sinput command
- * reads next string from cin whether or not we're reading from a script and puts it in
- * the string stack. Useful for user input.
+/*! \brief cin a string from the user
+
+Takes command, cins a string, adds it to the string stack.
  */
 bool inputstring(){
 	string input;
@@ -12,11 +9,9 @@ bool inputstring(){
 	prs.strstore(input);
 }
 
-/*
- * stringpop()
- *
- * function run on strpop command
- * prints the top string and pops it from the string stack
+/*! \brief pops the top string
+
+Takes the top string on the stack and pops it with no newline
  */
 bool stringpop(){
 	if(!prs.strempty()){
@@ -27,11 +22,9 @@ bool stringpop(){
 	}
 }
 
-/*
- * stringpopn()
- *
- * function run on strpopn command
- * prints the top string and pops it from the stack, printing a newline after the fact.
+/*!\brief pops the top string and linebreaks
+
+Takes the top string on the stack and pops it followed by a line break
  */
 bool stringpopn(){
 	if(!prs.strempty())
@@ -40,11 +33,9 @@ bool stringpopn(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
 
-/*
- * strtop()
- *
- * function run on strtop command
- * Prints the top string on the string stack
+/*! \brief Displays the top string
+
+Displays the top string with no line break
  */
 bool strtop(){
 	if(!prs.strempty())
@@ -53,11 +44,10 @@ bool strtop(){
 		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
 }
 
-/*
- * strtopn()
- *
- * function run on strtopn command
- * Prints thetop string on the string stack followed by a line break
+/*! \brief Displays the top string and linebreaks
+
+Takes the top string on the stack and displays it followed by a line break. No change to stack
+contents.
  */
 bool strtopn(){
 	if(!prs.strempty())
@@ -66,13 +56,17 @@ bool strtopn(){
 		prs.strtop();
 }
 
-/*
-codestring()
+/*! \brief allows the scripter to add a string to the stack
 
-Function used to add strings, similar to setting a string variable in
-C++. Syntax is similar to the print statement, using the same escape
-format. This is in part because it works, and in part because the code
-is shared between the two, with only the end action actually changing.
+uses print /print style formatting in order to store a string to the stack.
+
+/ for line break
+
+// for a single /
+
+/// for an extra space
+
+/ns to get rid of space between preceeding and following word
 */
 bool codestring(){
 	string command = prs.read();

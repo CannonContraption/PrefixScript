@@ -1,4 +1,9 @@
 #include<cmath>
+
+/*! \brief Advanced mathematical functions module
+
+Adds trig functions, powers, sqrt to the main language core by adding a math command
+*/
 bool advancedmath(){
 	double a;
 	double b;

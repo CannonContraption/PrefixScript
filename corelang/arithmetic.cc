@@ -26,6 +26,8 @@ bool add(){
 }
 
 /*! \brief Simple subtraction command
+
+Takes numbers, each number after the first is subtracted from the first
  */
 bool sub(){
 	double number;
@@ -59,11 +61,9 @@ bool sub(){
 	return true;
 }
 
-/*
- * mul()
- * 
- * command run with the * command
- * multiplies all numbers until it sees /*
+/*! \brief Simple multiplication
+
+* /* command handler
  */
 bool mul(){
 	double product = 1;
@@ -82,11 +82,9 @@ bool mul(){
 	}
 }
 
-/*
- * div()
- *
- * function run with / command
- * divides first number by each succeeding number until it sees //
+/*! \brief Simple division
+
+handles / // command
  */
 bool div(){
 	double number;

@@ -1,3 +1,7 @@
+/*! \brief command to set the memory slot in repetition memory
+
+Handles the repeat memory slots, allowing the user to set a value in any of those buffers
+*/
 bool repeatmemory() {
 	double tostore;
 	int slot;

@@ -1,8 +1,6 @@
-/*
- * stack_pop()
- * 
- * function run on pop command
- * basically a wrapper for prs.pop(), pops the top value and displays it
+/*! \brief Handles stack pop command
+
+Pops the stack
  */
 bool stack_pop(){
 	if(!prs.empty())
@@ -11,21 +9,17 @@ bool stack_pop(){
 		prs.pop();
 }
 
-/*
- * stack_silentpop()
- *
- * function run on silentpop command
- * pops the top value without displaying it
+/*! \brief Handles silentpop command
+
+Pops the stack without displaying anything
  */
 bool stack_silentpop(){
 	prs.pop();
 }
 
-/*
- * stack_popn()
- *
- * function run on popn command
- * like stack_pop but adds a line break
+/*! \brief Handles popn command
+
+Pops the stack and adds a line break
  */
 bool stack_popn(){
 	if(!prs.empty())
@@ -34,11 +28,9 @@ bool stack_popn(){
 		prs.pop();
 }
 
-/*
- * stack_top()
- *
- * function run on the top command
- * displays the top number on the current stack
+/*! \brief handles stack top command
+
+Displays the top stack number
  */
 bool stack_top(){
 	if(!prs.empty())
@@ -47,11 +39,9 @@ bool stack_top(){
 		prs.top();
 }
 
-/*
- * stack_topn()
- *
- * function run on the topn command
- * displays top number followed by newline
+/*! \brief handles stack topn command
+
+Displays the top stack number followed by a line break
  */
 bool stack_topn(){
 	if(!prs.empty())
@@ -60,12 +50,10 @@ bool stack_topn(){
 		prs.top();
 }
 
-/*
- * switchstack()
- *
- * function run on stack command
- * takes next input and switches to the stack with that number.
- * If no such stack exists, it screams profanity gently at the user.
+/*! \brief command to switch stack
+
+Reads one more after the stack command and sets the stack based on what is entered. If not
+in the range 1-3, screams at user gently. If in that range, switches stack
  */
 bool switchstack(){
 	string input = prs.read();
