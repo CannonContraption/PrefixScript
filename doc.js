@@ -1,2 +1,2 @@
-version = "v0.017-89-gf3fde65";
+version = "v0.017-93-g6b2c7b5";
 document.getElementById("introduction").innerHTML="PrefixScript "+version+" Documentation Page";
