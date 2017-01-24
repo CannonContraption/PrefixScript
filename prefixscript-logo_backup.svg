@@ -10,16 +10,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="2184.5334"
-   height="2184.5334"
+   width="2048"
+   height="2048"
    viewBox="0 0 2048 2048"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.0 r"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="prefixscript-logo.svg"
-   inkscape:export-filename="/home/jim/Documents/Programs/pfs-rewrite/pfslogo-small.png"
-   inkscape:export-xdpi="2.3299999"
-   inkscape:export-ydpi="2.3299999">
+   inkscape:export-filename="/home/jim/pfslogo.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -104,7 +104,7 @@
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
-     inkscape:window-height="1007"
+     inkscape:window-height="1008"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -116,7 +116,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -134,7 +134,7 @@
        y="-984.74628"
        ry="249.21602" />
     <path
-       style="fill:url(#linearGradient4188);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4188);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0"
        d="m 1362.8571,878.07646 -177.1428,-908.57144 211.4286,777.14284 408.5714,-71.4286 -622.8572,-705.71424 682.8572,-188.57143 -362.8572,74.28571 -320,111.42857 368.5715,-711.42857 -54.2857,594.28572 365.7142,-68.57143 -54.2857,888.57147 -414.2857,82.8571 z"
        id="path4160"
        inkscape:connector-curvature="0" />
@@ -159,27 +159,27 @@
        id="path4146"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:url(#linearGradient4212);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4212);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0"
        d="M 222.85714,-890.49498 14.285714,-224.7807 137.14286,823.79076 Z"
        id="path4150"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:url(#linearGradient4204);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4204);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0"
        d="m 754.28571,-599.06641 -331.42857,148.57143 268.57143,294.28571 z"
        id="path4152"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:url(#linearGradient4220);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4220);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0"
        d="m 1085.7143,-830.49498 -194.28573,520 5.71429,1122.85714 z"
        id="path4154"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:url(#linearGradient4172);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4172);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
        d="M 1382.8571,-284.7807 1100,-339.06641 l -20,128.57143 z"
        id="path4156"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:url(#linearGradient4180);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:url(#linearGradient4180);fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0"
        d="M 1534.2857,-759.06641 1125.7143,-504.7807 1140,-701.92355 Z"
        id="path4158"
        inkscape:connector-curvature="0" />
