@@ -7,3 +7,4 @@ build/*
 kdev4/
 html/
 latex/
+.directory
