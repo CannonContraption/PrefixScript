@@ -1,3 +1,5 @@
+Note: master is incomplete right now. Please refer to one of the release tags if you want to actually use PrefixScript at the moment.
+
 WELCOME TO PREFIXSCRIPT!
 
 PrefixScript is a lightweight scripting language written ONLY in base C++11. Advantages of PrefixScript include:
