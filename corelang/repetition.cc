@@ -21,3 +21,14 @@ bool get_repeat_bounds(){
 	else
 		repeatend = cin.tellg();
 }
+
+bool repeat_code(){
+	cin.seekg(repeatstart);
+	int position = cin.tellg();
+	while(position != repeatend){
+		if(position == repeatend){
+			if(repeatmemory[0] == 0) break;
+		}
+	}
+	
+}
