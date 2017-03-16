@@ -12,7 +12,7 @@
  */
 class commandparser{
 	commandregister   *cmdreg; //!< Pointer to the global command register object.
-protected:
+public: //Encapsulation is stupid in this context.
 	string            command; //!< Current command. Used for recursive parsing.
 	/*
 	 * File-read stuff
@@ -57,12 +57,6 @@ protected:
 	double            memory[32]; //!< 32 double values for memory (like a calculator)
 	int               returncode; //!< return code for the script, and possibly the interpreter
 	bool              exitnow; //!< tells the command listener whether to exit right now
-public:
-	/*
-	 * Global commands
-	 * 
-	 * things like reading commands, and stack management
-	 */
 	string            read();
 	string            strtop();
 	string            strpop();

@@ -1,20 +1,23 @@
-/*! \brief command to set the memory slot in repetition memory
+int repeatstart;
+int repeatend;
 
-Handles the repeat memory slots, allowing the user to set a value in any of those buffers
-*/
-bool repeatmemory() {
-	double tostore;
-	int slot;
-	string memstore = prs.read();
-	string strslot = prs.read();
-	slot = prs.toint(strslot);
-	if (memstore == "pop") {
-		tostore = prs.pop();
+/* \brief Sets repeat start, starts looking for end.
+ * 
+ * This function is designed to take the beginning of a repeat sequence, store its
+ * position in the stream, then look for the end of the repeat block. If it finds the end
+ * of the repeat block, it records its position.
+ */
+bool get_repeat_bounds(){
+	if(prs.scriptread)
+		repeatstart = prs.scriptfile.tellg();
+	else
+		repeatstart = cin.tellg();
+	string readthis = prs.read();
+	while(readthis != "/repeat"){
+		readthis = prs.read();
 	}
-	else if (memstore == "top") {
-		tostore = prs.top();
-	}
-	else {
-		tostore = prs.todouble(memstore);
-	}
+	if(prs.scriptread)
+		repeatend = prs.scriptfile.tellg()-7; //length of /repeat
+	else
+		repeatend = cin.tellg()-7;
 }
