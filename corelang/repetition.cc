@@ -17,7 +17,7 @@ bool get_repeat_bounds(){
 		readthis = prs.read();
 	}
 	if(prs.scriptread)
-		repeatend = prs.scriptfile.tellg()-7; //length of /repeat
+		repeatend = prs.scriptfile.tellg();
 	else
-		repeatend = cin.tellg()-7;
+		repeatend = cin.tellg();
 }
