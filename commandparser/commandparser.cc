@@ -42,7 +42,7 @@ int commandparser::listen(){
   if(exitnow){
     return returncode;
   }
-  return 127;
+  return 0;
 }
 
 /*!
