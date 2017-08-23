@@ -42,65 +42,65 @@ public: //Encapsulation is stupid in this context.
 	 */
 	int               repeatlower[32]; //!< Lower repetition buffer line number
 	int               repeatupper[32]; //!< upper repetition buffer line number
-	char              repeatmode[32]; //!< Function for each level of the repetition buffer
-	vector<int>       repeatindex; //!< What line the buffer is currently executing
-	bool              repeatread; //!< representation of whether we're reading from the repeition buffer
-	bool              previousrepeat; //!< previous repetition buffer level
-	vector<string>    repetitionbuffer; //!< the repetition buffers themselves live here
-	int               repeatlevel; //!< current level of repeat. a loop in a loop would have index 1
-	string            condition; //!< conditional string used for testing truth
-	/*
-	 * Memory
-	 * 
-	 * 32 stack-independant memory slots
-	 */
-	double            memory[32]; //!< 32 double values for memory (like a calculator)
-	int               returncode; //!< return code for the script, and possibly the interpreter
-	bool              exitnow; //!< tells the command listener whether to exit right now
-	string            read();
-	string            strtop();
-	string            strpop();
-	double            pop();
-	double            top();
-	void              store(double value);
-	void              strstore(string value);
-	bool              empty();
-	bool              strempty();
-	int               listen();
-	void              setstack(int stacknum);
-	double            todouble(const string& s);
-	double            todouble_multsafe(const string& s);
-	int               toint(const string& s);
-	void              memstore(int pos, double value);
-	double            memrecall(int pos);
-	/*
-	 * File io commands
-	 * 
-	 * for setting file mode, and for reading from a file
-	 */
-	bool              setfilename(string file);
-	/*
-	* Loop and Branching Path control
-	* 
-	* Defines some basic functions for doing repetition and
-	* logic.
-	*/
-	bool              testcondition(string first, string condition, string second);
-	void              setrepetitionbuff(string buff);
-	void              increaserepeatlevel();
-	void              decreaserepeatlevel();
-	void              execbuff();
-	/*
-	 * Constructors and exit commands
-	 * 
-	 * Defines headers for constructors and exit commands.
-	 * This is so we can actually get a hold of our command
-	 * register and keep it common with the rest of the 
-	 * program.
-	 */
-	commandparser     (commandregister * r);
-	void              exitprogram(int rcd);
+  char              repeatmode[32]; //!< Function for each level of the repetition buffer
+  vector<int>       repeatindex; //!< What line the buffer is currently executing
+  bool              repeatread; //!< representation of whether we're reading from the repeition buffer
+  bool              previousrepeat; //!< previous repetition buffer level
+  vector<string>    repetitionbuffer; //!< the repetition buffers themselves live here
+  int               repeatlevel; //!< current level of repeat. a loop in a loop would have index 1
+  string            condition; //!< conditional string used for testing truth
+  /*
+   * Memory
+   * 
+   * 32 stack-independant memory slots
+   */
+  double            memory[32]; //!< 32 double values for memory (like a calculator)
+  double            repeatmemory[32]; //!< 32 slot repeition buffer, for testing values
+  int               returncode; //!< return code for the script, and possibly the interpreter
+  bool              exitnow; //!< tells the command listener whether to exit right now
+  string            read();
+  string            strtop();
+  string            strpop();
+  double            pop();
+  double            top();
+  void              store(double value);
+  void              strstore(string value);
+  bool              empty();
+  bool              strempty();
+  int               listen();
+  void              setstack(int stacknum);
+  double            todouble(const string& s);
+  double            todouble_multsafe(const string& s);
+  int               toint(const string& s);
+  void              memstore(int pos, double value);
+  double            memrecall(int pos);
+  /*
+   * File io commands
+   * 
+   * for setting file mode, and for reading from a file
+   */
+  bool              setfilename(string file);
+  /*
+   * Loop and Branching Path control
+   * 
+   * Defines some basic functions for doing repetition and
+   * logic.
+   */
+  bool              testcondition(string first, string condition, string second);
+  void              setrepetitionbuff(string buff);
+  void              increaserepeatlevel();
+  void              decreaserepeatlevel();
+  void              execbuff();
+  /*
+   * Constructors and exit commands
+   * 
+   * Defines headers for constructors and exit commands.
+   * This is so we can actually get a hold of our command
+   * register and keep it common with the rest of the 
+   * program.
+   */
+  commandparser     (commandregister * r);
+  void              exitprogram(int rcd);
 
-	bool getScriptRead();
+  bool getScriptRead();
 };
-	

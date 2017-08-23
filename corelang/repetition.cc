@@ -8,27 +8,28 @@ int repeatend;
  * of the repeat block, it records its position.
  */
 bool get_repeat_bounds(){
-	if(prs.scriptread)
-		repeatstart = prs.scriptfile.tellg();
-	else
-		repeatstart = cin.tellg();
-	string readthis = prs.read();
-	while(readthis != "/repeat"){
-		readthis = prs.read();
-	}
-	if(prs.scriptread)
-		repeatend = prs.scriptfile.tellg();
-	else
-		repeatend = cin.tellg();
+  if(prs.scriptread)
+    repeatstart = prs.scriptfile.tellg();
+  else
+    repeatstart = cin.tellg();
+  string readthis = prs.read();
+  while(readthis != "/repeat"){
+    readthis = prs.read();
+  }
+  if(prs.scriptread)
+    repeatend = prs.scriptfile.tellg();
+  else
+    repeatend = cin.tellg();
+  return true;
 }
 
 bool repeat_code(){
-	cin.seekg(repeatstart);
-	int position = cin.tellg();
-	while(position != repeatend){
-		if(position == repeatend){
-			if(repeatmemory[0] == 0) break;
-		}
-	}
-	
+  cin.seekg(repeatstart);
+  int position = cin.tellg();
+  while(position != repeatend){
+    if(position == repeatend){
+      if(prs.repeatmemory[0] == 0) break;
+    }
+  }
+  return true;
 }

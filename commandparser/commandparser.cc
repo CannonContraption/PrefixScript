@@ -7,7 +7,7 @@
  * stack.
  */
 void commandparser::store(double value){
-	storage[currentstorage].push(value);
+  storage[currentstorage].push(value);
 }
 
 /*!
@@ -22,26 +22,27 @@ void commandparser::store(double value){
  * level of recursion is read to be executed.
  */
 int commandparser::listen(){
-	command = "";
-	while(command != "exit" && exitnow == false){
-		command = read();
-		if(cin.fail()){
-			break;
-		}
-		if(scriptread && scriptfile.fail()){
-			break;
-		}
-		if(repeatread && repeatindex[repeatlevel] == repetitionbuffer[repeatlevel].length()-3) return returncode;
-		if(cmdreg->checkforcommand(command)){
-			cmdreg->runcommand(command);
-		} else {
-			cerr<<"\033[1;31mERROR: \033[0;31mInvalid command:\033[m\033[1;33m "<<command<<"\033[m"<<endl;
-		}
-	}
-	cmdreg->unlink();
-	if(exitnow){
-		return returncode;
-	}
+  command = "";
+  while(command != "exit" && exitnow == false){
+    command = read();
+    if(cin.fail()){
+      break;
+    }
+    if(scriptread && scriptfile.fail()){
+      break;
+    }
+    if(repeatread && repeatindex[repeatlevel] == repetitionbuffer[repeatlevel].length()-3) return returncode;
+    if(cmdreg->checkforcommand(command)){
+      cmdreg->runcommand(command);
+    } else {
+      cerr<<"\033[1;31mERROR: \033[0;31mInvalid command:\033[m\033[1;33m "<<command<<"\033[m"<<endl;
+    }
+  }
+  cmdreg->unlink();
+  if(exitnow){
+    return returncode;
+  }
+  return 127;
 }
 
 /*!
@@ -51,8 +52,8 @@ int commandparser::listen(){
  * to do so.
  */
 void commandparser::exitprogram(int rcd){
-	returncode = rcd;
-	exitnow    = true;
+  returncode = rcd;
+  exitnow    = true;
 }
 
 /*!
@@ -63,7 +64,7 @@ void commandparser::exitprogram(int rcd){
  * other modules from taking over the command themselves, this blank function has been added
  * to fill the gap.
  */
-bool exit(){}
+bool exit(){return true;}
 
 /*!
  * \brief standard way to convert to a double, defaults to 1
@@ -75,11 +76,11 @@ bool exit(){}
  * muliplication operations, thus it is named the multiplication-safe (multsafe) version).
  */
 double commandparser::todouble_multsafe( const string& s ){
-	istringstream i(s);
-	double x;
-	if (!(i >> x))
-		return 1;
-	return x;
+  istringstream i(s);
+  double x;
+  if (!(i >> x))
+    return 1;
+  return x;
 }
 
 /*!
@@ -92,11 +93,11 @@ double commandparser::todouble_multsafe( const string& s ){
  * contribute to a sum if it fails).
  */
 double commandparser::todouble( const string& s ){
-	istringstream i(s);
-	double x;
-	if (!(i >> x))
-		return 0;
-	return x;
+  istringstream i(s);
+  double x;
+  if (!(i >> x))
+    return 0;
+  return x;
 }
 
 /*! \brief standard way to convert to an int, defaults to 0
@@ -106,11 +107,11 @@ double commandparser::todouble( const string& s ){
  * command while still providing a conversion method for other parts of the program.
  */
 int commandparser::toint( const string& s ){
-	istringstream i(s);
-	int x;
-	if (!(i >> x))
-		return 0;
-	return x;
+  istringstream i(s);
+  int x;
+  if (!(i >> x))
+    return 0;
+  return x;
 }
 
 /*! \brief sets the current stack number.
@@ -120,11 +121,11 @@ int commandparser::toint( const string& s ){
  * numbers from.
  */
 void commandparser::setstack(int stacknum){
-	if(stacknum<4&&stacknum>0){
-		currentstorage = stacknum;
-	} else{
-		cerr<<"\033[1;31mERROR: \033[0;31mInvalid stack number.\033[m"<<endl;
-	}
+  if(stacknum<4&&stacknum>0){
+    currentstorage = stacknum;
+  } else{
+    cerr<<"\033[1;31mERROR: \033[0;31mInvalid stack number.\033[m"<<endl;
+  }
 }
 
 /*! \brief grabs the top stack number and returns it
@@ -135,10 +136,11 @@ void commandparser::setstack(int stacknum){
  * Obeys the currentstorage attribute
  */
 double commandparser::top(){
-	if(!storage[currentstorage].empty())
-		return storage[currentstorage].top();
-	else
-		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
+  if(!storage[currentstorage].empty())
+    return storage[currentstorage].top();
+  else
+    cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
+  return 0;
 }
 
 /*!
@@ -149,7 +151,7 @@ double commandparser::top(){
  * that every time.
  */
 bool commandparser::empty(){
-	return storage[currentstorage].empty();
+  return storage[currentstorage].empty();
 }
 
 /*! \brief checks if the string storage is empty
@@ -158,7 +160,7 @@ bool commandparser::empty(){
  * double stack.
  */
 bool commandparser::strempty(){
-	return strstorage.empty();
+  return strstorage.empty();
 }
 
 /*! \brief pops the stack
@@ -166,19 +168,20 @@ bool commandparser::strempty(){
  * Returns the top number from the stack and removes it. Exactly the same as true RPN pop.
  */
 double commandparser::pop(){
-	if(!storage[currentstorage].empty()){
-		double result = top();
-		storage[currentstorage].pop();
-		return result;
-	}
-	else
-		cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
+  if(!storage[currentstorage].empty()){
+    double result = top();
+    storage[currentstorage].pop();
+    return result;
+  }
+  else
+    cerr<<"\033[1;31mERROR: \033[m\033[31mStack is empty!\033[m"<<endl;
+  return 0;
 }
 
 /*! \brief stores a string to the string stack
  */
 void commandparser::strstore(string value){
-	strstorage.push(value);
+  strstorage.push(value);
 }
 
 /*! \brief returns the top string on the string stack
@@ -187,10 +190,11 @@ void commandparser::strstore(string value){
  * egregious error. Otherwise it returns the top string without touching the stack's contents.
  */
 string commandparser::strtop(){
-	if(!strstorage.empty())
-		return strstorage.top();
-	else
-		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
+  if(!strstorage.empty())
+    return strstorage.top();
+  else
+    cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
+  return "YOUSEENOTHING.";
 }
 
 /*! \brief returns the top string on the string stack and pops it
@@ -199,14 +203,14 @@ string commandparser::strtop(){
  * pops it. If it is empty, rants at the user about how they just tried to read a blank book.
  */
 string commandparser::strpop(){
-	if(!strstorage.empty()){
-		string result = strstorage.top();
-		strstorage.pop();
-		return result;
-	}
-	else
-		cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
-	return "";
+  if(!strstorage.empty()){
+    string result = strstorage.top();
+    strstorage.pop();
+    return result;
+  }
+  else
+    cerr<<"\033[1;31mERROR: \033[m\033[31mString stack is empty!\033[m"<<endl;
+  return "";
 }
 
 /*!
@@ -216,8 +220,9 @@ string commandparser::strpop(){
  * bit so that the listener knows we're reading from a file instead of std::cin
  */
 bool commandparser::openfile(){
-	scriptfile.open(filename, fstream::in);
-	scriptread = true;
+  scriptfile.open(filename, fstream::in);
+  scriptread = true;
+  return true;
 }
 
 /*! \brief Sets the file name to read from
@@ -226,9 +231,9 @@ bool commandparser::openfile(){
  * succeeds, it returns truth. Otherwise it returns lies (returns false).
  */
 bool commandparser::setfilename(string file){
-	filename = file;
-	if (openfile()) return true;
-	return false;
+  filename = file;
+  if (openfile()) return true;
+  return false;
 }
 
 /*! \brief grabs the next command to execute and returns it
@@ -240,32 +245,32 @@ bool commandparser::setfilename(string file){
  * they don't have to care where they're reading from.
  */
 string commandparser::read(){
-	string toread;
-	if(scriptread){
-		scriptfile>>toread;
-		if(repeatread){
-			//use tellg and seekg to work this
-			//Repetition buffer turned out to be
-			//kind of clumsy with a file on hand.
-		}
-	} else if(repeatread){
-		if(repeatindex[repeatlevel] >= repetitionbuffer[repeatlevel].length()-2){
-			repeatread = false;
-			repeatlevel--;
-			return "";
-		}
-		for(int i = repeatindex[repeatlevel]; i<repetitionbuffer[repeatlevel].length(); i++){
-			repeatindex[repeatlevel] = i;
-			if(repetitionbuffer[repeatlevel][i] ==  ' ' ||  repetitionbuffer[repeatlevel][i] ==  '	' || repetitionbuffer[repeatlevel][i] == '\n') break;
-			toread += repetitionbuffer[repeatlevel][i];
-		}
-		cout << "repeat read " << toread << endl;
-	} else if(failcount>maxfails){
-		toread = "exit";
-	} else{
-		cin>>toread;
-	}
-	return toread;
+  string toread;
+  if(scriptread){
+    scriptfile>>toread;
+    if(repeatread){
+      //use tellg and seekg to work this
+      //Repetition buffer turned out to be
+      //kind of clumsy with a file on hand.
+    }
+  } else if(repeatread){
+    if(repeatindex[repeatlevel] >= repetitionbuffer[repeatlevel].length()-2){
+      repeatread = false;
+      repeatlevel--;
+      return "";
+    }
+    for(int i = repeatindex[repeatlevel]; i<repetitionbuffer[repeatlevel].length(); i++){
+      repeatindex[repeatlevel] = i;
+      if(repetitionbuffer[repeatlevel][i] ==  ' ' ||  repetitionbuffer[repeatlevel][i] ==  '	' || repetitionbuffer[repeatlevel][i] == '\n') break;
+      toread += repetitionbuffer[repeatlevel][i];
+    }
+    cout << "repeat read " << toread << endl;
+  } else if(failcount>maxfails){
+    toread = "exit";
+  } else{
+    cin>>toread;
+  }
+  return toread;
 }
 
 /*! \brief Sets the contents of the next repetition buffer
@@ -274,9 +279,9 @@ string commandparser::read(){
  * repeated. This also feeds the [read](@ref read) command by giving it stuff to read when we're repeating stuff.
  */
 void commandparser::setrepetitionbuff(string buff){
-	repetitionbuffer.emplace_back(buff);
-	repeatindex.emplace_back(0);
-	repeatlevel = repeatindex.size()-1;
+  repetitionbuffer.emplace_back(buff);
+  repeatindex.emplace_back(0);
+  repeatlevel = repeatindex.size()-1;
 }
 
 /*! \brief Executes the current repetition buffer once.
@@ -285,14 +290,14 @@ void commandparser::setrepetitionbuff(string buff){
  * is truth in its conditional statement, this tells [read()](@ref read) to read from the repetition buffer again.
  */
 void commandparser::execbuff(){
-	cout << "gotexecbuff" << endl;
-	previousrepeat = false;
-	if(repeatread) previousrepeat = true;
-	repeatread=true;
-	while(repeatread) {
-		cmdreg->runcommand(read());
-		cout << "running command..." << endl;
-	}
+  cout << "gotexecbuff" << endl;
+  previousrepeat = false;
+  if(repeatread) previousrepeat = true;
+  repeatread=true;
+  while(repeatread) {
+    cmdreg->runcommand(read());
+    cout << "running command..." << endl;
+  }
 }
 
 /*! \brief Increases the repetition buffer level
@@ -300,7 +305,7 @@ void commandparser::execbuff(){
  * Tells the interpreter we've got one more nested loop.
  */
 void commandparser::increaserepeatlevel(){
-	repeatlevel++;
+  repeatlevel++;
 }
 
 /*! \brief Decreases the repetition buffer level
@@ -308,7 +313,7 @@ void commandparser::increaserepeatlevel(){
  * Tells the interpreter we've got one less nested loop.
  */
 void commandparser::decreaserepeatlevel(){
-	repeatlevel--;
+  repeatlevel--;
 }
 
 /*! \brief checks whether we're reading from a script and returns that information
@@ -322,7 +327,7 @@ void commandparser::decreaserepeatlevel(){
  * command parser.
  */
 bool commandparser::getScriptRead(){
-	return scriptread;
+  return scriptread;
 }
 
 /*! \brief tests a conditional statement based on three read() results
@@ -332,44 +337,44 @@ bool commandparser::getScriptRead(){
  * separated.
  */
 bool commandparser::testcondition(string first, string condition, string second){
-	char mode = ' ';
-	bool fsde = true;
-	for(int i = 0; i<condition.length(); i++){
-		if(condition[i] == '=' && mode == ' ') mode = '=';
-		if(condition[i] == '!')                mode = '!';
-		if(condition[i] == '<')                mode = '<';
-		if(condition[i] == '=' && mode == '<') mode = 'l';
-		if(condition[i] == '>')                mode = '>';
-		if(condition[i] == '=' && mode == '>') mode = 'g';
-	}
-	double firstdbl;
-	double seconddbl;
-	if(first ==  "pop")
-		firstdbl = pop();
-    else if (first ==  "top")
-        firstdbl = top();
-	else
-		firstdbl = todouble(first);
-	if(second ==  "pop")
-		seconddbl = pop();
-    else if (second == "top")
-        seconddbl = top();
-	else
-		seconddbl = todouble(second);
-	if(mode == '='){
-		if(firstdbl == seconddbl) return true;
-	} else if (mode == '!'){
-		if(firstdbl != seconddbl) return true;
-	} else if (mode == 'l'){
-		if(firstdbl <= seconddbl) return true;
-	} else if (mode == '<'){
-		if(firstdbl < seconddbl) return true;
-	} else if (mode == 'g'){
-		if(firstdbl >= seconddbl) return true;
-	} else if (mode == '>'){
-		if(firstdbl > seconddbl) return true;
-	}
-	return false;
+  char mode = ' ';
+  bool fsde = true;
+  for(int i = 0; i<condition.length(); i++){
+    if(condition[i] == '=' && mode == ' ') mode = '=';
+    if(condition[i] == '!')                mode = '!';
+    if(condition[i] == '<')                mode = '<';
+    if(condition[i] == '=' && mode == '<') mode = 'l';
+    if(condition[i] == '>')                mode = '>';
+    if(condition[i] == '=' && mode == '>') mode = 'g';
+  }
+  double firstdbl;
+  double seconddbl;
+  if(first ==  "pop")
+    firstdbl = pop();
+  else if (first ==  "top")
+    firstdbl = top();
+  else
+    firstdbl = todouble(first);
+  if(second ==  "pop")
+    seconddbl = pop();
+  else if (second == "top")
+    seconddbl = top();
+  else
+    seconddbl = todouble(second);
+  if(mode == '='){
+    if(firstdbl == seconddbl) return true;
+  } else if (mode == '!'){
+    if(firstdbl != seconddbl) return true;
+  } else if (mode == 'l'){
+    if(firstdbl <= seconddbl) return true;
+  } else if (mode == '<'){
+    if(firstdbl < seconddbl) return true;
+  } else if (mode == 'g'){
+    if(firstdbl >= seconddbl) return true;
+  } else if (mode == '>'){
+    if(firstdbl > seconddbl) return true;
+  }
+  return false;
 }
 
 /*! \brief stores a value into a memory slot
@@ -377,7 +382,7 @@ bool commandparser::testcondition(string first, string condition, string second)
  * Stores a value into a memory slot.
  */
 void commandparser::memstore(int pos, double value){
-	memory[pos] = value;
+  memory[pos] = value;
 }
 
 /*! \brief recalls a memory value based on its slot number.
@@ -385,17 +390,17 @@ void commandparser::memstore(int pos, double value){
  * Recalls a memory slot. Function similar to a mult-memory calculator.
  */
 double commandparser::memrecall(int pos){
-	return memory[pos];
+  return memory[pos];
 }
 
 /*! \brief command parser constructor
  * 
-* Initializes the command parser and sets the active command register.
+ * Initializes the command parser and sets the active command register.
  */
 commandparser::commandparser(commandregister * r){
-	cmdreg = r;
-	repeatlevel=-1;
-	currentstorage = 1;
-	r->insertcommand("exit", exit);
+  cmdreg = r;
+  repeatlevel=-1;
+  currentstorage = 1;
+  r->insertcommand("exit", exit);
 }
 

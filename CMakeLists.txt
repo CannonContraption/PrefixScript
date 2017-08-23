@@ -6,10 +6,10 @@ configure_file (
     "${PROJECT_SOURCE_DIR}/versioninfo.h.in"
     "${PROJECT_SOURCE_DIR}/versioninfo.h"
 )
-configure_file (
-    "${PROJECT_SOURCE_DIR}/doc.js.in"
-    "${PROJECT_SOURCE_DIR}/doc.js"
-)
+#configure_file (
+#    "${PROJECT_SOURCE_DIR}/doc.js.in"
+#    "${PROJECT_SOURCE_DIR}/doc.js"
+#)
 include_directories("${PROJECT_BINARY_DIR}")
 add_executable(prefixscript main.cc)
 set_property(TARGET prefixscript PROPERTY CXX_STANDARD 11)
