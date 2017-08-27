@@ -17,35 +17,35 @@ using namespace std;
  */
 class commandregister{
 protected:
-	/*! \brief Commandmodule single link structure
-	 * 
-	 * The commandmodule struct is the basis of the command
-	 * register. It acts as the central object by which
-	 * commands are searched for. When a person types a string,
-	 * the corresponding function is executed. This model has
-	 * the advantage of control, where it is possible to check
-	 * to make sure no two commands have the same name. While
-	 * this checking happens at runtime, not compile-time, it
-	 * still is better than no checking, like before.
-	 * 
-	 * Note that there is a pointer for next, this is a single-
-	 * linked list. The reason is because linked lists allow for
-	 * some program commands or features to be disabled and
-	 * enabled on-the-fly, allowing for programs to negotiate
-	 * between competing libraries for available commands by
-	 * disabling conflicting ones before a competing module with
-	 * better support is loaded.
-	 */
-	struct commandmodule{
-		bool (*function)(); /*!< Pointer to the function we'll run */
-		string command; /*!< What the user types to make function() happen. */
-		commandmodule * next; /*!< The next command in our list. */
-	};
-	commandmodule * head; /*!< the head of the register list */
+  /*! \brief Commandmodule single link structure
+   * 
+   * The commandmodule struct is the basis of the command
+   * register. It acts as the central object by which
+   * commands are searched for. When a person types a string,
+   * the corresponding function is executed. This model has
+   * the advantage of control, where it is possible to check
+   * to make sure no two commands have the same name. While
+   * this checking happens at runtime, not compile-time, it
+   * still is better than no checking, like before.
+   * 
+   * Note that there is a pointer for next, this is a single-
+   * linked list. The reason is because linked lists allow for
+   * some program commands or features to be disabled and
+   * enabled on-the-fly, allowing for programs to negotiate
+   * between competing libraries for available commands by
+   * disabling conflicting ones before a competing module with
+   * better support is loaded.
+   */
+  struct commandmodule{
+    bool (*function)(); /*!< Pointer to the function we'll run */
+    string command; /*!< What the user types to make function() happen. */
+    commandmodule * next; /*!< The next command in our list. */
+  };
+  commandmodule * head; /*!< the head of the register list */
 	
 public:
-	bool insertcommand(string command, bool(*function)());
-	bool checkforcommand(string command);
-	bool runcommand(string command);
-	void unlink();
+  bool insertcommand(string command, bool(*function)());
+  bool checkforcommand(string command);
+  bool runcommand(string command);
+  void unlink();
 };

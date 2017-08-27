@@ -11,37 +11,37 @@
  * its functions, and to potentially allow multiple copies to run simultaniously.
  */
 class commandparser{
-	commandregister   *cmdreg; //!< Pointer to the global command register object.
+  commandregister   *cmdreg; //!< Pointer to the global command register object.
 public: //Encapsulation is stupid in this context.
-	string            command; //!< Current command. Used for recursive parsing.
-	/*
-	 * File-read stuff
-	 * 
-	 * stdin vs. file stuff
-	 */
-	bool              isfile; //!< Tells the program whether we're dealing with stdin or a file
-	string            filename; //!< File name should we be using one
-	bool              scriptread; //!< tells the program whether we're reading a script.
-	fstream           scriptfile; //!< File stream to use instead of std::cin when reading from a file
-	bool              openfile();
-	/*
-	 * Storage commands
-	 * 
-	 * Used for storing values. Also variables to select which
-	 * storage stack to use
-	 */
-	stack<double>     storage[3]; //!< Our three storage stacks, used for storing all output
-	stack<string>     strstorage; //!< String storage stack, same as double one but for strings
-	int               currentstorage; //!< Which storage stack we're using right now (1-3)
-	//Old fail count code, need to check if this is still used
-	int               failcount; //!< Deprecated count of failed commands. Has been succeeded by EOF support
-	int               maxfails; //!< Deprecated maximum number of failed commands. Has been succeeded by EOF support
-	/*
-	 * File-based repetition variables, allowing for 32 nested
-	 * loops controlled by start and end line numbers.
-	 */
-	int               repeatlower[32]; //!< Lower repetition buffer line number
-	int               repeatupper[32]; //!< upper repetition buffer line number
+  string            command; //!< Current command. Used for recursive parsing.
+  /*
+   * File-read stuff
+   * 
+   * stdin vs. file stuff
+   */
+  bool              isfile; //!< Tells the program whether we're dealing with stdin or a file
+  string            filename; //!< File name should we be using one
+  bool              scriptread; //!< tells the program whether we're reading a script.
+  fstream           scriptfile; //!< File stream to use instead of std::cin when reading from a file
+  bool              openfile();
+  /*
+   * Storage commands
+   * 
+   * Used for storing values. Also variables to select which
+   * storage stack to use
+   */
+  stack<double>     storage[3]; //!< Our three storage stacks, used for storing all output
+  stack<string>     strstorage; //!< String storage stack, same as double one but for strings
+  int               currentstorage; //!< Which storage stack we're using right now (1-3)
+  //Old fail count code, need to check if this is still used
+  int               failcount; //!< Deprecated count of failed commands. Has been succeeded by EOF support
+  int               maxfails; //!< Deprecated maximum number of failed commands. Has been succeeded by EOF support
+  /*
+   * File-based repetition variables, allowing for 32 nested
+   * loops controlled by start and end line numbers.
+   */
+  int               repeatlower[32]; //!< Lower repetition buffer line number
+  int               repeatupper[32]; //!< upper repetition buffer line number
   char              repeatmode[32]; //!< Function for each level of the repetition buffer
   vector<int>       repeatindex; //!< What line the buffer is currently executing
   bool              repeatread; //!< representation of whether we're reading from the repeition buffer
